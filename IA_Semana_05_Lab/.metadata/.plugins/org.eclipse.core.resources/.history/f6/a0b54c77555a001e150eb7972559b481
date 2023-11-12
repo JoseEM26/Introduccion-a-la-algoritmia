@@ -1,0 +1,190 @@
+package semana05;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.SystemColor;
+
+public class tienda extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JLabel lblCategoria;
+	private JLabel lblHoras;
+	private JLabel lblHijos;
+	private JTextField txtHoras;
+	private JTextField txtHijos;
+	private JButton btnprocesar;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+	private JComboBox cboCAtegorias;
+	private JButton btnEliminar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					tienda frame = new tienda();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public tienda() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblCategoria = new JLabel("Categoria");
+		lblCategoria.setBackground(Color.WHITE);
+		lblCategoria.setIcon(new ImageIcon("C:\\Users\\ADMIN\\Downloads\\categorias.png"));
+		lblCategoria.setBounds(10, 11, 83, 14);
+		contentPane.add(lblCategoria);
+		
+		lblHoras = new JLabel("Horas");
+		lblHoras.setIcon(new ImageIcon("C:\\Users\\ADMIN\\Downloads\\reloj.png"));
+		lblHoras.setBounds(10, 36, 83, 14);
+		contentPane.add(lblHoras);
+		
+		lblHijos = new JLabel("hijos");
+		lblHijos.setIcon(new ImageIcon("C:\\Users\\ADMIN\\Downloads\\familia.png"));
+		lblHijos.setBounds(10, 60, 83, 14);
+		contentPane.add(lblHijos);
+		
+		txtHoras = new JTextField();
+		txtHoras.setColumns(10);
+		txtHoras.setBounds(103, 33, 86, 20);
+		contentPane.add(txtHoras);
+		
+		txtHijos = new JTextField();
+		txtHijos.setColumns(10);
+		txtHijos.setBounds(103, 57, 86, 20);
+		contentPane.add(txtHijos);
+		
+		btnprocesar = new JButton("Procesar");
+		btnprocesar.setIcon(new ImageIcon("C:\\Users\\ADMIN\\Downloads\\flujo-de-trabajo.png"));
+		btnprocesar.addActionListener(this);
+		btnprocesar.setBounds(321, 7, 103, 23);
+		contentPane.add(btnprocesar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 85, 414, 165);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		txtS.setBackground(new Color(204, 255, 255));
+		scrollPane.setViewportView(txtS);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\ADMIN\\Downloads\\expediente.png"));
+		btnEliminar.addActionListener(this);
+		btnEliminar.setBounds(321, 32, 103, 23);
+		contentPane.add(btnEliminar);
+		
+		cboCAtegorias = new JComboBox();
+		cboCAtegorias.setModel(new DefaultComboBoxModel(new String[] {"A", "B"}));
+		cboCAtegorias.setBounds(103, 7, 86, 22);
+		contentPane.add(cboCAtegorias);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEliminar) {
+			actionPerformedBtnEliminar(e);
+		}
+		if (e.getSource() == btnprocesar) {
+			actionPerformedBtnprocesar(e);
+		}
+	}
+	protected void actionPerformedBtnprocesar(ActionEvent e) {
+		double horas,sueldoBasico=0,sueldoBruto,Descuento,SueldoNeto,bonificacion;
+		int categorias,hijos=0;
+		
+		categorias=cboCAtegorias.getSelectedIndex();
+		horas=Double.parseDouble(txtHoras.getText());
+		hijos=Integer.parseInt(txtHijos.getText());
+		
+		if (categorias==0) 
+			sueldoBasico=horas*45;
+		else
+			sueldoBasico=horas*37.5;
+		
+		if (hijos<=3) 
+			bonificacion=hijos*40.5;
+		else {
+			bonificacion=hijos*35;}
+		
+		sueldoBruto=sueldoBasico+bonificacion;
+		
+		if (sueldoBruto>=3500)
+			Descuento=sueldoBruto*0.135;
+		else 
+			Descuento=sueldoBruto*0.10;
+		
+		SueldoNeto=sueldoBruto-Descuento;
+		
+		
+	//salida
+		txtS.setText("Sueldos por categorias:"+"\n");
+		txtS.append("Sueldo basico\t:S/."+String.format("%,8.2f",sueldoBasico)+"\n");
+		txtS.append("Sueldo bruto\t:S/."+String.format("%,8.2f",sueldoBruto)+"\n");
+		txtS.append("Sueldo neto\t:S/."+String.format("%,8.2f",SueldoNeto)+"\n");
+		txtS.append("descuento\t:S/."+String.format("%,8.2f",Descuento)+"\n");
+		txtS.append("bonificacion\t:S/."+String.format("%,8.2f",bonificacion)+"\n");
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	protected void actionPerformedBtnEliminar(ActionEvent e) {
+		
+		txtHijos.setText("");
+		txtHoras.setText("");
+		txtS.setText("");
+		txtHoras.requestFocus();
+	}
+}

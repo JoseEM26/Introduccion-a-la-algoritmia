@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+C:\Users\ADMIN\Pictures\ACTIVIDADES\Eclipse\IA_Semana_07_Lab\.metadata\.plugins\org.eclipse.jdt.core
+3066927745.index
+3084555955.index
+2042299678.index
+1483447768.index

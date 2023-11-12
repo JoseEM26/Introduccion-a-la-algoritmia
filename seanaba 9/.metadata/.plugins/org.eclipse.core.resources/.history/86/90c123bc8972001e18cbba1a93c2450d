@@ -1,0 +1,123 @@
+package cibertec;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
+
+public class compus extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JLabel lblMarca;
+	private JLabel lblCantidad;
+	private JButton btnProcesar;
+	private JButton btnBorrar;
+	private JComboBox cboMarca;
+	private JTextField txtCantidad;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					compus frame = new compus();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public compus() {
+		setTitle("T2");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblMarca = new JLabel("Marca");
+		lblMarca.setBounds(10, 11, 80, 14);
+		contentPane.add(lblMarca);
+		
+		lblCantidad = new JLabel("Cantidad");
+		lblCantidad.setBounds(10, 36, 80, 14);
+		contentPane.add(lblCantidad);
+		
+		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
+		btnProcesar.setBounds(335, 7, 89, 23);
+		contentPane.add(btnProcesar);
+		
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBounds(335, 32, 89, 23);
+		contentPane.add(btnBorrar);
+		
+		cboMarca = new JComboBox();
+		cboMarca.setModel(new DefaultComboBoxModel(new String[] {"Lenovo i3", "Lenovo i5", "HP Ryzen 5", "Asus i7", "Asus Gamer"}));
+		cboMarca.setBounds(100, 7, 100, 22);
+		contentPane.add(cboMarca);
+		
+		txtCantidad = new JTextField();
+		txtCantidad.setBounds(100, 35, 100, 20);
+		contentPane.add(txtCantidad);
+		txtCantidad.setColumns(10);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 70, 414, 180);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnProcesar) {
+			actionPerformedBtnProcesar(e);
+		}
+	}
+	protected void actionPerformedBtnProcesar(ActionEvent e) {
+		
+		int cantidad, funda, mouse;
+		double impcom, impdes, imppag;
+		
+		sw
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+}

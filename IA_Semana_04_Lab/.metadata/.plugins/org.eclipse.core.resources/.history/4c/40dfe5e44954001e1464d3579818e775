@@ -1,0 +1,184 @@
+package semana04;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+public class Fabrica extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JLabel lblCantidad;
+	private JTextField txtCantidad;
+	private JLabel lblMochilas;
+	private JButton btnProcesar;
+	private JButton btnBorrar;
+	private JScrollPane scpScroll;
+	private JTextArea txtS;
+	private JComboBox cmbMochilas;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Fabrica frame = new Fabrica();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Fabrica() {
+		setTitle("F\u00E1brica");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 230);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		lblCantidad = new JLabel("Cantidad");
+		lblCantidad.setBounds(10, 11, 46, 14);
+		contentPane.add(lblCantidad);
+
+		txtCantidad = new JTextField();
+		txtCantidad.setBounds(66, 8, 86, 20);
+		contentPane.add(txtCantidad);
+		txtCantidad.setColumns(10);
+
+		lblMochilas = new JLabel("Mochilas");
+		lblMochilas.setBounds(10, 36, 46, 14);
+		contentPane.add(lblMochilas);
+
+		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
+		btnProcesar.setBounds(335, 7, 89, 23);
+		contentPane.add(btnProcesar);
+
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(this);
+		btnBorrar.setBounds(335, 32, 89, 23);
+		contentPane.add(btnBorrar);
+
+		scpScroll = new JScrollPane();
+		scpScroll.setBounds(10, 64, 414, 117);
+		contentPane.add(scpScroll);
+
+		txtS = new JTextArea();
+		scpScroll.setViewportView(txtS);
+		
+		cmbMochilas = new JComboBox();
+		cmbMochilas.setModel(new DefaultComboBoxModel(new String[] {"sherman", "faguo", "aldo", "suburban"}));
+		cmbMochilas.setBounds(76, 32, 137, 22);
+		contentPane.add(cmbMochilas);
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnBorrar) {
+			actionPerformedBtnBorrar(arg0);
+		}
+		if (arg0.getSource() == btnProcesar) {
+			actionPerformedBtnProcesar(arg0);
+		}
+	}
+
+	protected void actionPerformedBtnBorrar(ActionEvent arg0) {
+		txtCantidad.setText("");
+		txtCantidad.setText("");
+		txtS.setText("");
+		txtCantidad.requestFocus();
+	}
+
+	protected void actionPerformedBtnProcesar(ActionEvent arg0) {
+	//Determinacion de variabñes
+		double mochilas,impCompra=0,impVenta,impdescuento=0;
+		int obsequio=0,Cantidad;
+		
+	//ENtrada
+		mochilas=cmbMochilas.getSelectedIndex();
+		Cantidad=Integer.parseInt(txtCantidad.getText());
+		
+	//Proceso importe de compra
+		if (mochilas==0) 
+			impCompra=149.9*Cantidad;
+		if (mochilas==1) 
+			impCompra=89.9*Cantidad;
+		if (mochilas==2) 
+			impCompra=119.9*Cantidad;
+		if (mochilas==4) 
+			impCompra=174.9*Cantidad;
+		
+		if (Cantidad<5) 
+			impdescuento=impCompra*0.05;
+		if (Cantidad>=5 && Cantidad<10) 
+			impdescuento=impCompra*0.07;
+		if (Cantidad>=10 && Cantidad<20) 
+			impdescuento=impCompra*0.09;
+		if (Cantidad>=20) 
+			impdescuento=impCompra*0.11;
+		
+		if (Cantidad<200) 
+			obsequio=Cantidad*5;
+		if (Cantidad>=200 && Cantidad<500) 
+			obsequio=Cantidad*2;
+		if (Cantidad>=500 && Cantidad<700) 
+			obsequio=Cantidad*8;
+		if (Cantidad>=700) 
+			obsequio=Cantidad*10;
+		impVenta=impCompra-impdescuento;
+		
+		txtS.setText("importe de compra"+impCompra+"\n");
+		txtS.append("importe descuento"+impdescuento+"\n");
+		txtS.append("importe pago"+impVenta+"\n");
+		txtS.append("obsequio"+obsequio);
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+	}
+}

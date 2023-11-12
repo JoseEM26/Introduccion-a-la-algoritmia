@@ -1,0 +1,6 @@
+INDEX VERSION 1.131+C:\Users\ADMIN\Pictures\ACTIVIDADES\Eclipse\seanaba 9\.metadata\.plugins\org.eclipse.jdt.core
+3066927745.index
+1810572213.index
+511231062.index
+791594861.index
+22699913.index

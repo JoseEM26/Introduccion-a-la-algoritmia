@@ -1,0 +1,163 @@
+package cibertec;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
+
+public class compus extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JLabel lblMarca;
+	private JLabel lblCantidad;
+	private JButton btnProcesar;
+	private JButton btnBorrar;
+	private JComboBox cboMarca;
+	private JTextField txtCantidad;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					compus frame = new compus();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public compus() {
+		setFont(new Font("Monospaced", Font.BOLD, 12));
+		setTitle("T2");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		lblMarca = new JLabel("Marca");
+		lblMarca.setBounds(10, 11, 80, 14);
+		contentPane.add(lblMarca);
+
+		lblCantidad = new JLabel("Cantidad");
+		lblCantidad.setBounds(10, 36, 80, 14);
+		contentPane.add(lblCantidad);
+
+		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
+		btnProcesar.setBounds(335, 7, 89, 23);
+		contentPane.add(btnProcesar);
+
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBounds(335, 32, 89, 23);
+		contentPane.add(btnBorrar);
+
+		cboMarca = new JComboBox();
+		cboMarca.setModel(new DefaultComboBoxModel(
+				new String[] { "Lenovo i3", "Lenovo i5", "HP Ryzen 5", "Asus i7", "Asus Gamer" }));
+		cboMarca.setBounds(100, 7, 100, 22);
+		contentPane.add(cboMarca);
+
+		txtCantidad = new JTextField();
+		txtCantidad.setBounds(100, 35, 100, 20);
+		contentPane.add(txtCantidad);
+		txtCantidad.setColumns(10);
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 70, 414, 180);
+		contentPane.add(scrollPane);
+
+		txtS = new JTextArea();
+		txtS.setFont(new Font("Monospaced", Font.PLAIN, 13));
+		scrollPane.setViewportView(txtS);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnProcesar) {
+			actionPerformedBtnProcesar(e);
+		}
+	}
+
+	protected void actionPerformedBtnProcesar(ActionEvent e) {
+
+		int cantidad, funda = 0, mouse = 0, marca;
+		double impcom, impdes, imppag;
+
+		marca = cboMarca.getSelectedIndex();
+		cantidad = Integer.parseInt(txtCantidad.getText());
+
+		switch (marca) {
+		case 0:
+			impcom = cantidad * 1600.00;
+			break;
+		case 1:
+			impcom = cantidad * 2199.00;
+			break;
+		case 2:
+			impcom = cantidad * 1990.00;
+			break;
+		case 3:
+			impcom = cantidad * 3550.00;
+			break;
+		default:
+			impcom = cantidad * 3999.90;
+			break;
+		}
+
+		switch (cantidad) {
+		case 1:
+		case 2:
+		case 3:
+			impdes = impcom * 0.035;
+		case 4:
+		case 5:
+		case 6:
+			impdes = impcom * 0.045;
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+			impdes = impcom * 0.050;
+		default:
+			impdes = impcom * 0.070;
+		}
+
+		imppag = impcom - impdes;
+
+		if (imppag < 10000)
+			funda = cantidad / 2;
+		else
+			mouse = (cantidad / 3) * 2;
+
+		txtS.setText("Datos" + "\n");
+		txtS.append("Importe de Compra \t: " + String.format("%,8.2f", impcom) + "\n");
+		txtS.append("Importe de Descuento \t: " + String.format("%,8.2f", impdes) + "\n");
+		txtS.append("Importe a Pagar \t: " + String.format("%,8.2f", imppag) + "\n");
+		txtS.append("Funda de Obsequio \t: " + funda + "\n");
+		txtS.append("Mouse de Obsequio \t: " + mouse + "\n");
+
+	}
+}

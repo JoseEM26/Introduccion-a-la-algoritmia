@@ -1,0 +1,130 @@
+package semana04;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Tienda1 extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JLabel lblNumero;
+	private JTextField txtNumero;
+	private JButton btnProcesar;
+	private JButton btnEliminar;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Tienda1 frame = new Tienda1();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Tienda1() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblNumero = new JLabel("Numero");
+		lblNumero.setBounds(10, 11, 46, 14);
+		contentPane.add(lblNumero);
+		
+		txtNumero = new JTextField();
+		txtNumero.setBounds(66, 8, 86, 20);
+		contentPane.add(txtNumero);
+		txtNumero.setColumns(10);
+		
+		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
+		btnProcesar.setBounds(221, 7, 89, 23);
+		contentPane.add(btnProcesar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(320, 7, 89, 23);
+		contentPane.add(btnEliminar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(20, 56, 414, 182);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnProcesar) {
+			actionPerformedBtnProcesar(e);
+		}
+	}
+	protected void actionPerformedBtnProcesar(ActionEvent e) {
+		//determinacion de variables
+		  int Numero ;
+		 String obsequio = "ninguno";
+		 
+		//Entrada
+		 Numero = Integer.parseInt(txtNumero.getText());
+		 
+		//Proceso
+		 if (Numero>=1 && Numero<= 20) 
+			 obsequio = "Un lapicero";
+		 if (Numero>=21 && Numero<= 40) 
+			 obsequio = "Un Cuaderno de 100 Hojas";	
+		 if (Numero>=41 && Numero<= 60) 
+			 obsequio = "Una Caja de Plumones";
+		 if (Numero>=61 && Numero<= 80) 
+			 obsequio = "Un Cuaderno Espiral";
+		 if (Numero>=81 && Numero<= 99) 
+			 obsequio = "Una agenda";
+		 if (Numero == 100) 
+			 obsequio = "Una mochila";
+		 
+		 //salida
+		 txtS.setText("obsequio:" + obsequio + "\n");
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+}
