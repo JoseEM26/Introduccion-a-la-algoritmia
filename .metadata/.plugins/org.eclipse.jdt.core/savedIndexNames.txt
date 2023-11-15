@@ -1,4 +1,2 @@
-INDEX VERSION 1.131+C:\Users\ADMIN\Pictures\ACTIVIDADES\Eclipse\.metadata\.plugins\org.eclipse.jdt.core
-3084555955.index
-2179537226.index
-3066927745.index
+INDEX VERSION 1.131+C:\Users\ADMIN\Pictures\IntroduccionAlgoritmia\.metadata\.plugins\org.eclipse.jdt.core
+2168601347.index

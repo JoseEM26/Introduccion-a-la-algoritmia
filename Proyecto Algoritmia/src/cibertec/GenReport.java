@@ -153,8 +153,8 @@ public class GenReport extends JDialog {
 			txtS.setText("ESTADÍSTICA SOBRE EL PRECIO");
 			Imprimir("");Imprimir("");
 			Imprimir("Precio promedio :S/."+String.format("%,8.2f",pMedio));
-			Imprimir("Precio menor \t:S/."+String.format("%,8.2f",pMenor));
-			Imprimir("Precio mayor \t:S/."+String.format("%,8.2f",pMayor));
+			Imprimir("Precio mayor \t:S/."+String.format("%,8.2f",pMenor));
+			Imprimir("Precio menor \t:S/."+String.format("%,8.2f",pMayor));
 			
 		}
 	

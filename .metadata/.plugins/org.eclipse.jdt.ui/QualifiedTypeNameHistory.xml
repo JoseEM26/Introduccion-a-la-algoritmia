@@ -4,11 +4,11 @@
     <fullyQualifiedTypeName name="cibertec.complemento1"/>
     <fullyQualifiedTypeName name="cibertec.consultaCeramica"/>
     <fullyQualifiedTypeName name="cibertec.modificarCeramica"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="cibertec.listarCeramicas"/>
     <fullyQualifiedTypeName name="java.lang.Double"/>
     <fullyQualifiedTypeName name="cibertec.Ceramicas"/>
     <fullyQualifiedTypeName name="cibertec.vender"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
 </qualifiedTypeNameHistroy>
