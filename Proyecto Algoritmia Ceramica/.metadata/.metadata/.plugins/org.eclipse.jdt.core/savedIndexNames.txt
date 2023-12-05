@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+D:\Proyecto Algoritmia Ceramica\.metadata\.metadata\.plugins\org.eclipse.jdt.core
+387012104.index
+4110412185.index
+3008815958.index
+2938638603.index

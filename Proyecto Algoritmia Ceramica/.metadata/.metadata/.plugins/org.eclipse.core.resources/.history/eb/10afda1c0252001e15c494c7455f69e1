@@ -1,0 +1,164 @@
+package Ceramica;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class ModicarCeramica extends JDialog {
+	private JTextField txtPrecio;
+	private JTextField txtAncho;
+	private JTextField txtLargo;
+	private JTextField txtEspesor;
+	private JTextField txtContenido;
+	 private Menu parentFrame;
+
+	 public ModificarCeramica(Menu parentFrame) {
+	        this.parentFrame = parentFrame;
+	        setTitle("Modificar cerámico");
+	        setBounds(100, 100, 450, 300);
+	        getContentPane().setLayout(null);
+
+	        JLabel lblNewLabel = new JLabel("Modelo");
+	        lblNewLabel.setBounds(10, 21, 99, 14);
+	        getContentPane().add(lblNewLabel);
+
+	        comboBox = new JComboBox<>();
+	        comboBox.setModel(new DefaultComboBoxModel<>(new String[] {"Cinza Plus", "Luxury", "Austria", "Yungay Mix", "Thalía"}));
+	        comboBox.setBounds(135, 17, 172, 22);
+	        getContentPane().add(comboBox);
+
+	        JButton btnCerrar = new JButton("Cerrar");
+	        btnCerrar.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                dispose();
+	            }
+	        });
+	        btnCerrar.setBounds(317, 17, 89, 23);
+	        getContentPane().add(btnCerrar);
+
+	        txtPrecio = new JTextField();
+	        txtPrecio.setBounds(135, 43, 172, 20);
+	        getContentPane().add(txtPrecio);
+	        txtPrecio.setColumns(10);
+
+	        txtAncho = new JTextField();
+	        txtAncho.setColumns(10);
+	        txtAncho.setBounds(135, 68, 172, 20);
+	        getContentPane().add(txtAncho);
+
+	        txtLargo = new JTextField();
+	        txtLargo.setColumns(10);
+	        txtLargo.setBounds(135, 93, 172, 20);
+	        getContentPane().add(txtLargo);
+
+	        txtEspesor = new JTextField();
+	        txtEspesor.setColumns(10);
+	        txtEspesor.setBounds(135, 118, 172, 20);
+	        getContentPane().add(txtEspesor);
+
+	        txtContenido = new JTextField();
+	        txtContenido.setColumns(10);
+	        txtContenido.setBounds(135, 143, 172, 20);
+	        getContentPane().add(txtContenido);
+
+	        // Inicializa los campos con valores globales al abrir el diálogo
+	        comboBox.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                String modeloSeleccionado = comboBox.getSelectedItem().toString();
+	                switch (modeloSeleccionado) {
+	                    case "Cinza Plus":
+	                        txtPrecio.setText(String.valueOf(parentFrame.precio0));
+	                        txtAncho.setText(String.valueOf(parentFrame.ancho0));
+	                        txtLargo.setText(String.valueOf(parentFrame.largo0));
+	                        txtEspesor.setText(String.valueOf(parentFrame.espesor0));
+	                        txtContenido.setText(String.valueOf(parentFrame.contenido0));
+	                        break;
+	                    case "Luxury":
+	                        txtPrecio.setText(String.valueOf(parentFrame.precio1));
+	                        txtAncho.setText(String.valueOf(parentFrame.ancho1));
+	                        txtLargo.setText(String.valueOf(parentFrame.largo1));
+	                        txtEspesor.setText(String.valueOf(parentFrame.espesor1));
+	                        txtContenido.setText(String.valueOf(parentFrame.contenido1));
+	                        break;
+	                    case "Austria":
+	                        txtPrecio.setText(String.valueOf(parentFrame.precio2));
+	                        txtAncho.setText(String.valueOf(parentFrame.ancho2));
+	                        txtLargo.setText(String.valueOf(parentFrame.largo2));
+	                        txtEspesor.setText(String.valueOf(parentFrame.espesor2));
+	                        txtContenido.setText(String.valueOf(parentFrame.contenido2));
+	                        break;
+	                    case "Yungay Mix":
+	                        txtPrecio.setText(String.valueOf(parentFrame.precio3));
+	                        txtAncho.setText(String.valueOf(parentFrame.ancho3));
+	                        txtLargo.setText(String.valueOf(parentFrame.largo3));
+	                        txtEspesor.setText(String.valueOf(parentFrame.espesor3));
+	                        txtContenido.setText(String.valueOf(parentFrame.contenido3));
+	                        break;
+	                    case "Thalía":
+	                        txtPrecio.setText(String.valueOf(parentFrame.precio4));
+	                        txtAncho.setText(String.valueOf(parentFrame.ancho4));
+	                        txtLargo.setText(String.valueOf(parentFrame.largo4));
+	                        txtEspesor.setText(String.valueOf(parentFrame.espesor4));
+	                        txtContenido.setText(String.valueOf(parentFrame.contenido4));
+	                        break;
+	                }
+	            }
+	        });
+
+	        JButton btnGrabar = new JButton("Grabar");
+	        btnGrabar.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                String modeloSeleccionado = comboBox.getSelectedItem().toString();
+	                double nuevoPrecio = Double.parseDouble(txtPrecio.getText());
+
+	                switch (modeloSeleccionado) {
+	                    case "Cinza Plus":
+	                        parentFrame.precio0 = nuevoPrecio;
+	                        parentFrame.ancho0 = Double.parseDouble(txtAncho.getText());
+	                        parentFrame.largo0 = Double.parseDouble(txtLargo.getText());
+	                        parentFrame.espesor0 = Double.parseDouble(txtEspesor.getText());
+	                        parentFrame.contenido0 = Integer.parseInt(txtContenido.getText());
+	                        break;
+	                    case "Luxury":
+	                        parentFrame.precio1 = nuevoPrecio;
+	                        parentFrame.ancho1 = Double.parseDouble(txtAncho.getText());
+	                        parentFrame.largo1 = Double.parseDouble(txtLargo.getText());
+	                        parentFrame.espesor1 = Double.parseDouble(txtEspesor.getText());
+	                        parentFrame.contenido1 = Integer.parseInt(txtContenido.getText());
+	                        break;
+	                    case "Austria":
+	                        parentFrame.precio2 = nuevoPrecio;
+	                        parentFrame.ancho2 = Double.parseDouble(txtAncho.getText());
+	                        parentFrame.largo2 = Double.parseDouble(txtLargo.getText());
+	                        parentFrame.espesor2 = Double.parseDouble(txtEspesor.getText());
+	                        parentFrame.contenido2 = Integer.parseInt(txtContenido.getText());
+	                        break;
+	                    case "Yungay Mix":
+	                        parentFrame.precio3 = nuevoPrecio;
+	                        parentFrame.ancho3 = Double.parseDouble(txtAncho.getText());
+	                        parentFrame.largo3 = Double.parseDouble(txtLargo.getText());
+	                        parentFrame.espesor3 = Double.parseDouble(txtEspesor.getText());
+	                        parentFrame.contenido3 = Integer.parseInt(txtContenido.getText());
+	                        break;
+	                    case "Thalía":
+	                        parentFrame.precio4 = nuevoPrecio;
+	                        parentFrame.ancho4 = Double.parseDouble(txtAncho.getText());
+	                        parentFrame.largo4 = Double.parseDouble(txtLargo.getText());
+	                        parentFrame.espesor4 = Double.parseDouble(txtEspesor.getText());
+	                        parentFrame.contenido4 = Integer.parseInt(txtContenido.getText());
+	                        break;
+	                }
+	            }
+	        });
+	        btnGrabar.setBounds(317, 42, 89, 23);
+	        getContentPane().add(btnGrabar);
+	    }
+	}
+

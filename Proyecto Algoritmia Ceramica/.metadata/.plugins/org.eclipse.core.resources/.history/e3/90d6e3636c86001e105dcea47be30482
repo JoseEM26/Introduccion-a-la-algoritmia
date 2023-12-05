@@ -1,0 +1,407 @@
+package Ceramica;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
+import java.awt.Color;
+
+public class Vender extends JDialog implements ItemListener, ActionListener {
+
+	private final JPanel contentPanel = new JPanel();
+	private JTextField txtPrecio;
+	private JTextField txtCantidad;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JComboBox cmbModelo;
+	private JButton btnVender;
+	private JButton btnCerrar;
+	private JTextArea txtAreaResultado;
+	private JScrollPane scpScroll;
+	
+	public static int numeroVentaActual = 0,numeroVentaActual0,numeroVentaActual1,numeroVentaActual2,
+	numeroVentaActual3,numeroVentaActual4;
+	public static double importeTotalAcumulado=0,importeTotalAcumulado0,importeTotalAcumulado1,importeTotalAcumulado2,
+	importeTotalAcumulado3,importeTotalAcumulado4;
+	public static int cantidadCeramicos0,cantidadCeramicos1,cantidadCeramicos2,cantidadCeramicos3,cantidadCeramicos4;
+	public static double porcentajeCuotaDiaria0,porcentajeCuotaDiaria1,porcentajeCuotaDiaria2,
+	porcentajeCuotaDiaria3,porcentajeCuotaDiaria4;
+	
+	
+	
+	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			Vender dialog = new Vender();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Vender() {
+		setBackground(new Color(152, 251, 152));
+		setForeground(new Color(152, 251, 152));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Proyecto Algoritmia Ceramica\\img\\comercio.png"));
+		setTitle("Vender");
+		setBounds(100, 100, 500, 340);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setForeground(new Color(152, 251, 152));
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		{
+			lblNewLabel = new JLabel("Modelo");
+			lblNewLabel.setBounds(10, 21, 80, 14);
+			contentPanel.add(lblNewLabel);
+		}
+		{
+			lblNewLabel_1 = new JLabel("Precio (S/)");
+			lblNewLabel_1.setBounds(10, 46, 80, 14);
+			contentPanel.add(lblNewLabel_1);
+		}
+		{
+			lblNewLabel_2 = new JLabel("Cantidad");
+			lblNewLabel_2.setBounds(10, 71, 80, 14);
+			contentPanel.add(lblNewLabel_2);
+		}
+		{
+			cmbModelo = new JComboBox();
+			cmbModelo.addItemListener(this);
+			cmbModelo.setModel(new DefaultComboBoxModel(new String[] {"Cinza Plus", "Luxury", "Austria", "Yungay Mix", "Thal\u00EDa"}));
+			cmbModelo.setBounds(100, 17, 170, 22);
+			contentPanel.add(cmbModelo);
+		}
+		{
+			txtPrecio = new JTextField();
+			txtPrecio.setBounds(100, 43, 170, 20);
+			contentPanel.add(txtPrecio);
+			txtPrecio.setColumns(10);
+		}
+		{
+			txtCantidad = new JTextField();
+			txtCantidad.setBounds(100, 68, 170, 20);
+			contentPanel.add(txtCantidad);
+			txtCantidad.setColumns(10);
+		}
+		{
+			btnVender = new JButton("Vender");
+			btnVender.addActionListener(this);
+			btnVender.setBounds(385, 17, 89, 23);
+			contentPanel.add(btnVender);
+		}
+		{
+			btnCerrar = new JButton("Cerrar");
+			btnCerrar.addActionListener(this);
+			btnCerrar.setBounds(385, 42, 89, 23);
+			contentPanel.add(btnCerrar);
+		}
+		{
+			scpScroll = new JScrollPane();
+			scpScroll.setBounds(10, 100, 464, 190);
+			contentPanel.add(scpScroll);
+			{
+				txtAreaResultado = new JTextArea();
+				scpScroll.setViewportView(txtAreaResultado);
+				
+				ItemEvent itemEvent = new ItemEvent(cmbModelo, ItemEvent.ITEM_STATE_CHANGED, cmbModelo.getItemAt(0), ItemEvent.SELECTED);
+		        itemStateChanged(itemEvent);
+		    
+			}
+		}
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == btnVender) {
+			actionPerformedBtnVender(e);
+		}
+		if(e.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(e);
+		}
+	}
+	
+	public void itemStateChanged(ItemEvent e) {
+		
+		double precio;
+		String nombreElemento;
+		
+		nombreElemento = cmbModelo.getSelectedItem().toString();
+		
+		if(nombreElemento.equals("Cinza Plus")) {
+			precio = Menu.precio0;
+			txtPrecio.setText(String.valueOf(precio));
+	    }
+		if(nombreElemento.equals("Luxury")) {
+			precio = Menu.precio1;
+			txtPrecio.setText(String.valueOf(precio));
+		}
+		if(nombreElemento.equals("Austria")) {
+			precio = Menu.precio2;
+			txtPrecio.setText(String.valueOf(precio));
+		}
+		if(nombreElemento.equals("Yungay Mix")) {
+			precio = Menu.precio3;
+			txtPrecio.setText(String.valueOf(precio));
+		}
+		if(nombreElemento.equals("Thalía")) {
+			precio = Menu.precio4;
+			txtPrecio.setText(String.valueOf(precio));
+		}
+		
+		txtPrecio.setEditable(false);
+	}
+	
+    public void actionPerformedBtnVender(ActionEvent e) {
+    	
+    	int cantidadCeramicos,cantidadObsequio=0;
+    	double precio,importeCompra,importeDescuento=0,importePagar,porcentajeCuotaDiaria=0;
+    	String nombreElemento,modelo,tipoObsequio;
+    	
+    	try {
+            cantidadCeramicos = Integer.parseInt(txtCantidad.getText());
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Error: ¡Ingrese un valor válido!", "Advertencia", 
+            JOptionPane.WARNING_MESSAGE);
+        }
+    	
+    	nombreElemento = cmbModelo.getSelectedItem().toString();
+    	cantidadCeramicos = Integer.parseInt(txtCantidad.getText());
+    	
+    	switch (nombreElemento) {
+    	    case "Cinza Plus":
+    	    	modelo = Menu.modelo0;
+    	    	precio = Menu.precio0;
+    	    	importeCompra = cantidadCeramicos * precio;
+    	        break;
+    	    case "Luxury":
+    	    	modelo = Menu.modelo1;
+    	    	precio = Menu.precio1;
+    	    	importeCompra = cantidadCeramicos * precio;
+    	        break;
+    	    case "Austria":
+    	    	modelo = Menu.modelo2;
+    	    	precio = Menu.precio2;
+    	    	importeCompra = cantidadCeramicos * precio;
+    	        break;
+    	    case "Yungay Mix":
+    	    	modelo = Menu.modelo3;
+    	    	precio = Menu.precio3;
+    	    	importeCompra = cantidadCeramicos * precio;
+    	        break;
+    	    default:
+    	    	modelo = Menu.modelo4;
+    	    	precio = Menu.precio4;
+    	    	importeCompra = cantidadCeramicos * precio;
+    	        break;
+    	}
+    	
+    	if(cantidadCeramicos >= 1 && cantidadCeramicos <= 5) {
+    		importeDescuento = Menu.porcentaje1/100 * importeCompra;
+    	}
+    	if(cantidadCeramicos >= 6 && cantidadCeramicos <= 10) {
+    		importeDescuento = Menu.porcentaje2/100 * importeCompra;
+    	}
+    	if(cantidadCeramicos >= 11 && cantidadCeramicos <= 15) {
+    		importeDescuento = Menu.porcentaje3/100 * importeCompra;
+    	}
+    	if(cantidadCeramicos > 15) {
+    		importeDescuento = Menu.porcentaje4/100 * importeCompra;
+    	}
+    	
+    	tipoObsequio = Menu.tipoObsequio;
+    	
+    	importePagar = importeCompra - importeDescuento;
+    	
+    	if(cantidadCeramicos >= 1 && cantidadCeramicos <= 5) {
+    		cantidadObsequio = cantidadCeramicos * Menu.obsequioCantidad1;
+    	}
+    	if(cantidadCeramicos >= 6 && cantidadCeramicos <= 10) {
+    		cantidadObsequio = cantidadCeramicos * Menu.obsequioCantidad2;
+    	}
+    	if(cantidadCeramicos > 10) {
+    		cantidadObsequio = cantidadCeramicos * Menu.obsequioCantidad3;
+    	}
+    	
+    	switch(nombreElemento) {
+    	case "Cinza Plus":
+    		cantidadCeramicos0+=cantidadCeramicos;
+    	    break;
+    	case "Luxury":
+    		cantidadCeramicos1+=cantidadCeramicos;
+    		break;
+    	case "Austria":
+    		cantidadCeramicos2+=cantidadCeramicos;
+    		break;
+    	case "Yungay Mix":
+    		cantidadCeramicos3+=cantidadCeramicos;
+    		break;
+    	default:
+    		cantidadCeramicos4+=cantidadCeramicos;
+    		break;
+    	}
+    	
+    	switch(nombreElemento) {
+    	
+    	case "Cinza Plus":
+    	    txtAreaResultado.setText("BOLETA DE VENTA" + "\n");
+		    txtAreaResultado.append("\n" + "Modelo" + "\t" + "\t:" + " " + " " + modelo + "\n");
+		    txtAreaResultado.append("Precio" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + precio + "\n");
+		    txtAreaResultado.append("Cantidad adquirida" + "\t:" + " " + " " + (cantidadCeramicos0) + " " + " " + "\n");
+		    txtAreaResultado.append("Importe compra" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + 
+		    String.format("%.2f",importeCompra) + " " + " " + "\n");
+		    txtAreaResultado.append("Importe descuento" + "\t:" + " " + " " + "S/." + " " + " " + 
+		    String.format("%.2f",importeDescuento) + " " + " " + "\n");
+		    txtAreaResultado.append("Importe pagar" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + 
+		    String.format("%.2f",importePagar) + " " + " " + "\n");
+		    txtAreaResultado.append("Tipo de obsequio" + "\t:" + " " + " " + tipoObsequio + " " + " " + "\n");
+		    txtAreaResultado.append("Unidades obsequiadas" + "\t:" + " " + " " + cantidadObsequio + " " + " " + "\n");
+		    break;
+    	case "Luxury":
+    		txtAreaResultado.setText("BOLETA DE VENTA" + "\n");
+    		txtAreaResultado.append("\n" + "Modelo" + "\t" + "\t:" + " " + " " + modelo + "\n");
+    		txtAreaResultado.append("Precio" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + precio + "\n");
+    		txtAreaResultado.append("Cantidad adquirida" + "\t:" + " " + " " + (cantidadCeramicos1) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe compra" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importeCompra) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe descuento" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importeDescuento) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe pagar" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importePagar) + " " + " " + "\n");
+    		txtAreaResultado.append("Tipo de obsequio" + "\t:" + " " + " " + tipoObsequio + " " + " " + "\n");
+    		txtAreaResultado.append("Unidades obsequiadas" + "\t:" + " " + " " + cantidadObsequio + " " + " " + "\n");
+    		break;
+    	case "Austria":
+    		txtAreaResultado.setText("BOLETA DE VENTA" + "\n");
+    		txtAreaResultado.append("\n" + "Modelo" + "\t" + "\t:" + " " + " " + modelo + "\n");
+    		txtAreaResultado.append("Precio" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + precio + "\n");
+    		txtAreaResultado.append("Cantidad adquirida" + "\t:" + " " + " " + (cantidadCeramicos2) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe compra" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importeCompra) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe descuento" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importeDescuento) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe pagar" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importePagar) + " " + " " + "\n");
+    		txtAreaResultado.append("Tipo de obsequio" + "\t:" + " " + " " + tipoObsequio + " " + " " + "\n");
+    		txtAreaResultado.append("Unidades obsequiadas" + "\t:" + " " + " " + cantidadObsequio + " " + " " + "\n");
+    		break;
+    	case "Yungay Mix":
+    		txtAreaResultado.setText("BOLETA DE VENTA" + "\n");
+    		txtAreaResultado.append("\n" + "Modelo" + "\t" + "\t:" + " " + " " + modelo + "\n");
+    		txtAreaResultado.append("Precio" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + precio + "\n");
+    		txtAreaResultado.append("Cantidad adquirida" + "\t:" + " " + " " + (cantidadCeramicos3) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe compra" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importeCompra) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe descuento" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importeDescuento) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe pagar" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importePagar) + " " + " " + "\n");
+    		txtAreaResultado.append("Tipo de obsequio" + "\t:" + " " + " " + tipoObsequio + " " + " " + "\n");
+    		txtAreaResultado.append("Unidades obsequiadas" + "\t:" + " " + " " + cantidadObsequio + " " + " " + "\n");
+    		break;
+    	default:
+    		txtAreaResultado.setText("BOLETA DE VENTA" + "\n");
+    		txtAreaResultado.append("\n" + "Modelo" + "\t" + "\t:" + " " + " " + modelo + "\n");
+    		txtAreaResultado.append("Precio" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + precio + "\n");
+    		txtAreaResultado.append("Cantidad adquirida" + "\t:" + " " + " " + (cantidadCeramicos4) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe compra" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importeCompra) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe descuento" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importeDescuento) + " " + " " + "\n");
+    		txtAreaResultado.append("Importe pagar" + "\t" + "\t:" + " " + " " + "S/." + " " + " " + 
+    		String.format("%.2f",importePagar) + " " + " " + "\n");
+    		txtAreaResultado.append("Tipo de obsequio" + "\t:" + " " + " " + tipoObsequio + " " + " " + "\n");
+    		txtAreaResultado.append("Unidades obsequiadas" + "\t:" + " " + " " + cantidadObsequio + " " + " " + "\n");
+    		break;
+    	}
+    	
+    	
+    	numeroVentaActual++;
+		importeTotalAcumulado += importePagar;
+		
+		
+		if (numeroVentaActual % 5 == 0) {
+		    porcentajeCuotaDiaria = (importeTotalAcumulado / Menu.cuotaDiaria) * 100;
+		    String mensaje = "Venta Nro." + numeroVentaActual + "\n";
+		    mensaje += "Importe total general acumulado: S/." + String.format("%.2f",importeTotalAcumulado) + "\n";
+		    mensaje += "Porcentaje de la cuota diaria: " + String.format("%.2f",porcentajeCuotaDiaria) + "%";
+		    JOptionPane.showMessageDialog(this, mensaje, "Avance de ventas", JOptionPane.INFORMATION_MESSAGE);
+		    }
+		
+		
+		
+		switch (modelo) {
+		case "Cinza Plus":
+			numeroVentaActual0++;
+		     break;
+		case "Luxury":
+			numeroVentaActual1++;
+	         break;
+		case "Austria":
+			numeroVentaActual2++;
+			 break;
+		case "Yungay Mix":
+			numeroVentaActual3++;
+			 break;
+		default:
+			numeroVentaActual4++;
+			 break;
+		}
+		
+		
+		
+		
+		
+		switch (nombreElemento) {
+		case "Cinza Plus":
+		     importeTotalAcumulado0 += importePagar;
+		     break;
+		case "Luxury":
+			importeTotalAcumulado1 += importePagar;
+	         break;
+		case "Austria":
+			importeTotalAcumulado2+= importePagar;
+			 break;
+		case "Yungay Mix":
+			importeTotalAcumulado3+= importePagar;
+			 break;
+		default:
+			importeTotalAcumulado4+= importePagar;
+			 break;
+		}
+	
+	}
+    
+    
+    
+    public void actionPerformedBtnCerrar(ActionEvent e) {
+    	
+    	dispose();
+	}
+
+}

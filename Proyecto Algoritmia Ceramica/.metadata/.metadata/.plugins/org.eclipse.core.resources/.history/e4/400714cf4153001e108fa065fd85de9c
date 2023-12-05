@@ -1,0 +1,53 @@
+package Ceramica;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+
+public class Tienda extends JDialog {
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Tienda dialog = new Tienda();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Tienda() {
+		setTitle("Acerca de Tienda");
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Tienda 1.0");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 34));
+		lblNewLabel.setBounds(123, 11, 183, 39);
+		getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Autores");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_1.setBounds(181, 64, 58, 19);
+		getContentPane().add(lblNewLabel_1);
+		
+		JButton btnCerrar = new JButton("Cerrar");
+		btnCerrar.setBounds(167, 227, 89, 23);
+		getContentPane().add(btnCerrar);
+
+	}
+
+}

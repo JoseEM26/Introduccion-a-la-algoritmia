@@ -1,0 +1,93 @@
+package Ceramica;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class GenRepor extends JDialog {
+	private JComboBox cmbReporte;
+	private JButton btnCerrar;
+	private JTextArea txtS;
+	private Menu parentFrame;
+	
+
+	 
+	 
+	 public GenRepor(Menu parentFrame) {  
+	        this.parentFrame = parentFrame;  
+	    }
+	 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			GenRepor dialog = new GenRepor();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public GenRepor() {
+		setTitle("Generar Reportes");
+		setBounds(100, 100, 513, 300);
+		getContentPane().setLayout(null);
+		{
+			JLabel lblNewLabel = new JLabel("Tipo de reporte");
+			lblNewLabel.setBounds(10, 29, 79, 14);
+			getContentPane().add(lblNewLabel);
+		}
+		{
+			cmbReporte = new JComboBox();
+			cmbReporte.setModel(new DefaultComboBoxModel(new String[] {"Ventas por modelo", "Comparaci\u00F3n de precios con el precio promedio", "Comparaci\u00F3n de cajas vendidas con la cantidad \u00F3ptima", "Estad\u00EDstica sobre el precio"}));
+			cmbReporte.setBounds(119, 25, 210, 22);
+			getContentPane().add(cmbReporte);
+			cmbReporte.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	            	cmbReporte = new JComboBox<>();
+	            	cmbReporte.addItem("Ventas por modelo");
+	            	cmbReporte.addItem("Comparaci\\u00F3n de precios con el precio promedio");
+	            	cmbReporte.addItem("Comparaci\\u00F3n de cajas vendidas con la cantidad \\u00F3ptima");
+	            	cmbReporte.addItem("Estad\\u00EDstica sobre el precio");
+	            	
+		}
+    });
+		}
+		{
+			btnCerrar = new JButton("Cerrar");
+			btnCerrar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			btnCerrar.setBounds(394, 25, 89, 23);
+			getContentPane().add(btnCerrar);
+		}
+		{
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(10, 75, 473, 175);
+			getContentPane().add(scrollPane);
+			{
+				txtS = new JTextArea();
+				scrollPane.setViewportView(txtS);
+			}
+		}
+	}
+
+}

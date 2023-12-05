@@ -1,0 +1,72 @@
+package Ceramica;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+public class ConfigOptima extends JDialog {
+	private JTextField textField;
+private Menu parentFrame;
+	
+	public ConfigOptima(Menu parentFrame) {  
+        this.parentFrame = parentFrame;  
+    }
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ConfigOptima dialog = new ConfigOptima();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public ConfigOptima() {
+		setBounds(100, 100, 450, 118);
+		getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Cantidad \u00F3ptima de unidades vendidas");
+		lblNewLabel.setBounds(21, 22, 223, 14);
+		getContentPane().add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(254, 19, 49, 20);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAceptar.setBounds(335, 18, 89, 23);
+		getContentPane().add(btnAceptar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCancelar.setBounds(335, 43, 89, 23);
+		getContentPane().add(btnCancelar);
+
+	}
+
+}

@@ -55,32 +55,32 @@ public class GenReport extends JDialog {
 			Imprimir("VENTAS POR MODELO");
 			Imprimir("");
 			Imprimir("Modelo\t\t\t\t:"+Ceramicas.modelo0);
-			Imprimir("Cantidad de ventas\t\t:"+Ceramicas.cantVendidas0);
-			Imprimir("Cantidad de cajas vendidas\t:"+Ceramicas.cantCajas0);
+			Imprimir("Cantidad de ventas\t\t:\t"+Ceramicas.cantVendidas0);
+			Imprimir("Cantidad de cajas vendidas\t:\t"+Ceramicas.cantCajas0);
 			Imprimir("Importe total vendido\t\t:"+String.format("%,8.2f",Ceramicas.impAcumulado0));
 			Imprimir("Aporte a la cuota diaria\t:"+String.format("%,8.2f",(Ceramicas.impAcumulado0/Ceramicas.cuotaDiaria)*100)+"%");
 			Imprimir("");
 			Imprimir("Modelo\t\t\t\t:"+Ceramicas.modelo1);
-			Imprimir("Cantidad de ventas\t\t:"+Ceramicas.cantVendidas1);
-			Imprimir("Cantidad de cajas vendidas\t:"+Ceramicas.cantCajas1);
+			Imprimir("Cantidad de ventas\t\t:\t"+Ceramicas.cantVendidas1);
+			Imprimir("Cantidad de cajas vendidas\t:\t"+Ceramicas.cantCajas1);
 			Imprimir("Importe total vendido\t\t:"+String.format("%,8.2f",Ceramicas.impAcumulado1));
 			Imprimir("Aporte a la cuota diaria\t:"+String.format("%,8.2f",(Ceramicas.impAcumulado1/Ceramicas.cuotaDiaria)*100)+"%");
 			Imprimir("");
 			Imprimir("Modelo\t\t\t\t:"+Ceramicas.modelo2);
-			Imprimir("Cantidad de ventas\t\t:"+Ceramicas.cantVendidas2);
-			Imprimir("Cantidad de cajas vendidas\t:"+Ceramicas.cantCajas2);
+			Imprimir("Cantidad de ventas\t\t:\t"+Ceramicas.cantVendidas2);
+			Imprimir("Cantidad de cajas vendidas\t:\t"+Ceramicas.cantCajas2);
 			Imprimir("Importe total vendido\t\t:"+String.format("%,8.2f",Ceramicas.impAcumulado2));
 			Imprimir("Aporte a la cuota diaria\t:"+String.format("%,8.2f",(Ceramicas.impAcumulado2/Ceramicas.cuotaDiaria)*100)+"%");
 			Imprimir("");
 			Imprimir("Modelo\t\t\t\t:"+Ceramicas.modelo3);
-			Imprimir("Cantidad de ventas\t\t:"+Ceramicas.cantVendidas3);
-			Imprimir("Cantidad de cajas vendidas\t:"+Ceramicas.cantCajas3);
+			Imprimir("Cantidad de ventas\t\t:\t"+Ceramicas.cantVendidas3);
+			Imprimir("Cantidad de cajas vendidas\t:\t"+Ceramicas.cantCajas3);
 			Imprimir("Importe total vendido\t\t:"+String.format("%,8.2f",Ceramicas.impAcumulado3));
 			Imprimir("Aporte a la cuota diaria\t:"+String.format("%,8.2f",(Ceramicas.impAcumulado3/Ceramicas.cuotaDiaria)*100)+"%");
 			Imprimir("");
 			Imprimir("Modelo\t\t\t\t:"+Ceramicas.modelo4);
-			Imprimir("Cantidad de ventas\t\t:"+Ceramicas.cantVendidas4);
-			Imprimir("Cantidad de cajas vendidas\t:"+Ceramicas.cantCajas4);
+			Imprimir("Cantidad de ventas\t\t:\t"+Ceramicas.cantVendidas4);
+			Imprimir("Cantidad de cajas vendidas\t:\t"+Ceramicas.cantCajas4);
 			Imprimir("Importe total vendido\t\t:"+String.format("%,8.2f",Ceramicas.impAcumulado4));
 			Imprimir("Aporte a la cuota diaria\t:"+String.format("%,8.2f",(Ceramicas.impAcumulado4/Ceramicas.cuotaDiaria)*100)+"%");
 			}
@@ -165,7 +165,7 @@ public class GenReport extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 
-	//Calcular los precio			
+	//Calcular los precio mayores menores y medio			
 				double precioMayor;
 					if(Ceramicas.precio0<Ceramicas.precio1 && Ceramicas.precio0<Ceramicas.precio2&& Ceramicas.precio0<Ceramicas.precio3&& Ceramicas.precio0<Ceramicas.precio4) {
 						precioMayor=Ceramicas.precio0;	
@@ -204,7 +204,8 @@ public class GenReport extends JDialog {
 					PrecioMedio=(Ceramicas.precio0+Ceramicas.precio2+Ceramicas.precio1+Ceramicas.precio3+Ceramicas.precio4)/5;	
 				
 			
-				
+	// con esto al selecionar en el combo una seccion aparece el requerido no todos , solo el requerido
+					
 			int reporte=cboReporte.getSelectedIndex();
 			switch(reporte) {
 			case 0:

@@ -1,0 +1,122 @@
+package Ceramica;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class ConfigObse extends JDialog {
+	private JTextField txtTipoObsequio;
+	private JTextField txt1a5;
+	private JTextField txt6a10;
+	private JTextField txt11mas;
+private Menu parentFrame;
+	
+	public ConfigObse(Menu parentFrame) {  
+        this.parentFrame = parentFrame;  
+    }
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ConfigObse dialog = new ConfigObse();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	
+	 String tipobs = Menu.tipoObsequio;
+	 int obs1 = Menu.obsequioCantidad1;
+	 int obs2 = Menu.obsequioCantidad2;
+	 int obs3 = Menu.obsequioCantidad3;
+	 
+		String ob1 = String.valueOf(obs1);
+		String ob2 = String.valueOf(obs2);
+		String ob3 = String.valueOf(obs3);
+	
+	public ConfigObse() {
+		setTitle("Configurar cantidad \u00F3ptima");
+		setBounds(100, 100, 397, 200);
+		getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Tipo de obsequio");
+		lblNewLabel.setBounds(10, 11, 98, 14);
+		getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("1 a 5 unidades");
+		lblNewLabel_1.setBounds(10, 50, 86, 14);
+		getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("6 a 10 unidades");
+		lblNewLabel_2.setBounds(10, 90, 109, 14);
+		getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("11 a m\u00E1s unidades");
+		lblNewLabel_3.setBounds(10, 130, 109, 14);
+		getContentPane().add(lblNewLabel_3);
+		
+		txtTipoObsequio = new JTextField();
+		txtTipoObsequio.setText(tipobs);
+		txtTipoObsequio.setBounds(129, 8, 109, 20);
+		getContentPane().add(txtTipoObsequio);
+		txtTipoObsequio.setColumns(10);
+		
+		txt1a5 = new JTextField();
+		txt1a5.setText(ob1);
+		txt1a5.setBounds(129, 47, 109, 20);
+		getContentPane().add(txt1a5);
+		txt1a5.setColumns(10);
+		
+		txt6a10 = new JTextField();
+		txt6a10.setText(ob2);
+		txt6a10.setBounds(129, 87, 109, 20);
+		getContentPane().add(txt6a10);
+		txt6a10.setColumns(10);
+		
+		txt11mas = new JTextField();
+		txt11mas.setText(ob3);
+		txt11mas.setBounds(129, 127, 109, 20);
+		getContentPane().add(txt11mas);
+		txt11mas.setColumns(10);
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				 parentFrame.tipoObsequio = String.valueOf(txtTipoObsequio.getText());
+                 parentFrame.obsequioCantidad1 = Integer.parseInt(txt1a5.getText());
+                 parentFrame.obsequioCantidad2 = Integer.parseInt(txt6a10.getText());
+                 parentFrame.obsequioCantidad3 = Integer.parseInt(txt11mas.getText());
+                 
+                 dispose();
+			}
+		});
+		btnAceptar.setBounds(288, 7, 89, 23);
+		getContentPane().add(btnAceptar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCancelar.setBounds(288, 46, 89, 23);
+		getContentPane().add(btnCancelar);
+
+	}
+}

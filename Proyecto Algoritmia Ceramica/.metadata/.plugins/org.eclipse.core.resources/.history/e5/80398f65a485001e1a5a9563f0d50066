@@ -1,0 +1,138 @@
+package Ceramica;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class GenReporte extends JDialog {
+
+	private final JPanel contentPanel = new JPanel();
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			GenReporte dialog = new GenReporte();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	
+	 public static void registrarVentaModelo(String modelo, int cantidad, double importe) {
+	        // Verificamos si ya hay ventas registradas para este modelo
+	        if (ventasModelo.containsKey(modelo)) {
+	            List<VentaModelo> ventas = ventasModelo.get(modelo);
+	            ventas.add(new VentaModelo(cantidad, importe));
+	        } else {
+	            // Si no hay ventas registradas, creamos una nueva lista y la agregamos al mapa
+	            List<VentaModelo> nuevasVentas = new ArrayList<>();
+	            nuevasVentas.add(new VentaModelo(cantidad, importe));
+	            ventasModelo.put(modelo, nuevasVentas);
+	        }
+	    }
+
+	    // Método para generar el reporte de ventas por modelo
+	    public static void generarReporteVentasPorModelo(JTextArea textArea) {
+	        // Limpiamos el área de texto
+	        textArea.setText("Reporte de Ventas por Modelo:\n\n");
+
+	        // Recorremos el mapa de ventas por modelo
+	        for (Map.Entry<String, List<VentaModelo>> entry : ventasModelo.entrySet()) {
+	            String modelo = entry.getKey();
+	            List<VentaModelo> ventas = entry.getValue();
+
+	            // Mostramos la información de cada modelo
+	            textArea.append("Modelo: " + modelo + "\n");
+	            textArea.append("Cantidad de veces vendido: " + ventas.size() + "\n");
+
+	            double totalImporte = 0;
+	            for (VentaModelo venta : ventas) {
+	                totalImporte += venta.getImporte();
+	            }
+
+	            textArea.append("Total Importe de Ventas: S/." + String.format("%.2f", totalImporte) + "\n\n");
+	        }
+	    }
+
+	    // Clase interna para representar una venta por modelo
+	    private static class VentaModelo {
+	        private int cantidad;
+	        private double importe;
+
+	        public VentaModelo(int cantidad, double importe) {
+	            this.cantidad = cantidad;
+	            this.importe = importe;
+	        }
+
+	        public int getCantidad() {
+	            return cantidad;
+	        }
+
+	        public double getImporte() {
+	            return importe;
+	        }
+	    }
+	
+	public GenReporte() {
+		setTitle("Generar reportes\r");
+		setBounds(100, 100, 763, 507);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Tipo de Reporte");
+		lblNewLabel.setBounds(10, 27, 115, 16);
+		contentPanel.add(lblNewLabel);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			}
+		});
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ventas por modelo", "Comparaci\u00F3n de precios con el precio promedio", "Comparaci\u00F3n de cajas vendidas con la cantidad \u00F3ptima", "Estad\u00EDstica sobre el precio"}));
+		comboBox.setBounds(135, 25, 458, 23);
+		contentPanel.add(comboBox);
+		
+		
+		
+		
+		
+		JButton btnNewButton = new JButton("Cerrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(621, 25, 89, 23);
+		contentPanel.add(btnNewButton);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 82, 727, 375);
+		contentPanel.add(scrollPane);
+		
+		JTextArea textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+		
+		
+	}
+}

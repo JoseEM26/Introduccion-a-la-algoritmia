@@ -299,13 +299,7 @@ public class Ceramicas extends JFrame implements ActionListener {
 	}
 	//Boton para salir o cerrar el programa
 	protected void actionPerformedMntmNewMenuItem_3(ActionEvent e) {
-		int Salir = JOptionPane.YES_NO_OPTION;
-        JOptionPane.showConfirmDialog (null,"Quiere Salir de la Pagina??" ," Confirmar",Salir,3);
-        if (Salir == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null, "Gracias por su preferencia");
-        } else if (Salir == JOptionPane.NO_OPTION)
-            System.exit(0);
-        System.exit(0);
+		setVisible(false);
 	}
 	protected void mntmNewMenuItem_4_5ActionPerformed(ActionEvent e) {
 		ConCantOptima optima=new ConCantOptima();

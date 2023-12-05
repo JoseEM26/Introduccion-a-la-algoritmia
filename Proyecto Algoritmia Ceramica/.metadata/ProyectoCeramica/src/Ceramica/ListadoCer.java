@@ -1,0 +1,188 @@
+package Ceramica;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.Color;
+
+public class ListadoCer extends JDialog {
+	private JTextArea txtS;
+	private JButton btnListar;
+	private JButton btnCerrar;
+	 private Menu parentFrame;
+
+	    public ListadoCer(Menu parentFrame) {  
+	        this.parentFrame = parentFrame;  
+	    }
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ListadoCer dialog = new ListadoCer();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public ListadoCer() {
+		getContentPane().setBackground(new Color(152, 251, 152));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Proyecto Algoritmia Ceramica\\img\\portapapeles.png"));
+		setTitle("Listar Ceramico");
+		setBounds(100, 100, 528, 370);
+		getContentPane().setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 11, 492, 274);
+		getContentPane().add(scrollPane);
+		
+		txtS = new JTextArea();
+		txtS.setFont(new Font("MV Boli", Font.PLAIN, 13));
+		scrollPane.setViewportView(txtS);
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				txtS.setText("LISTADO DE CERÁMICOS \n\n");
+				
+			}
+		});
+		btnCerrar.setBounds(131, 296, 89, 23);
+		getContentPane().add(btnCerrar);
+		
+		btnListar = new JButton("Listar");
+		btnListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String modelo;
+				String precio;
+	            String ancho;
+	            String largo ;
+	            String espesor;
+	            String contenido;
+	                
+	            String modelo1;
+				String precio1;
+		        String ancho1;
+		        String largo1 ;
+		        String espesor1;
+		        String contenido1;
+		                
+		        String modelo2;
+				String precio2;
+			    String ancho2;
+			    String largo2 ;
+			    String espesor2;
+			    String contenido2;
+			    
+			    String modelo3;
+				String precio3;
+	            String ancho3;
+	            String largo3 ;
+	            String espesor3;
+	            String contenido3;
+	            
+	            String modelo4;
+				String precio4;
+	            String ancho4;
+	            String largo4 ;
+	            String espesor4;
+	            String contenido4;
+			                
+			                
+	                
+	                modelo = String.valueOf(parentFrame.modelo0);
+	                precio = String.valueOf(parentFrame.precio0);
+                    ancho = String.valueOf(parentFrame.ancho0);
+                    largo = String.valueOf(parentFrame.largo0);
+                    espesor = String.valueOf(parentFrame.espesor0);
+                    contenido = String.valueOf(parentFrame.contenido0);
+                    
+                    modelo1 = String.valueOf(parentFrame.modelo1);
+	                precio1 = String.valueOf(parentFrame.precio1);
+                    ancho1 = String.valueOf(parentFrame.ancho1);
+                    largo1 = String.valueOf(parentFrame.largo1);
+                    espesor1 = String.valueOf(parentFrame.espesor1);
+                    contenido1 = String.valueOf(parentFrame.contenido1);
+                    
+                    modelo2 = String.valueOf(parentFrame.modelo2);
+	                precio2 = String.valueOf(parentFrame.precio2);
+                    ancho2 = String.valueOf(parentFrame.ancho2);
+                    largo2 = String.valueOf(parentFrame.largo2);
+                    espesor2 = String.valueOf(parentFrame.espesor2);
+                    contenido2 = String.valueOf(parentFrame.contenido2);
+                    
+                    modelo3 = String.valueOf(parentFrame.modelo3);
+	                precio3 = String.valueOf(parentFrame.precio3);
+                    ancho3 = String.valueOf(parentFrame.ancho3);
+                    largo3 = String.valueOf(parentFrame.largo3);
+                    espesor3 = String.valueOf(parentFrame.espesor3);
+                    contenido3 = String.valueOf(parentFrame.contenido3);
+
+                    modelo4 = String.valueOf(parentFrame.modelo4);
+	                precio4 = String.valueOf(parentFrame.precio4);
+                    ancho4 = String.valueOf(parentFrame.ancho4);
+                    largo4 = String.valueOf(parentFrame.largo4);
+                    espesor4 = String.valueOf(parentFrame.espesor4);
+                    contenido4 = String.valueOf(parentFrame.contenido4);
+
+	                
+	                txtS.setText("LISTADO DE CERÁMICOS \n\n");
+	                txtS.append("Modelo\t: " + modelo + "\n");
+	                txtS.append("Precio\t:  " + "S/.  " + precio + "\n");
+	                txtS.append("Ancho (cm)\t:  "  + ancho + " cm" + "\n");
+	                txtS.append("Largo (cm)\t:  " + largo + " cm" + "\n");
+	                txtS.append("Espesor (mm)\t:  " + espesor + " cm" + "\n");
+	                txtS.append("Contenido\t:  " + contenido + " unidades" + "\n" + "\n");
+	                
+	                txtS.append("Modelo\t: " + modelo1 + "\n");
+	                txtS.append("Precio\t:  " + "S/.  " + precio1 + "\n");
+	                txtS.append("Ancho (cm)\t:  "  + ancho1 + " cm" + "\n");
+	                txtS.append("Largo (cm)\t:  " + largo1 + " cm" + "\n");
+	                txtS.append("Espesor (mm)\t:  " + espesor1 + " cm" + "\n");
+	                txtS.append("Contenido\t:  " + contenido1 + " unidades" + "\n");
+	                
+	                txtS.append("Modelo\t: " + modelo2 + "\n");
+	                txtS.append("Precio\t:  " + "S/.  " + precio2 + "\n");
+	                txtS.append("Ancho (cm)\t:  "  + ancho2 + " cm" + "\n");
+	                txtS.append("Largo (cm)\t:  " + largo2 + " cm" + "\n");
+	                txtS.append("Espesor (mm)\t:  " + espesor2 + " cm" + "\n");
+	                txtS.append("Contenido\t:  " + contenido2 + " unidades" + "\n" + "\n");
+	                
+	                txtS.append("Modelo\t: " + modelo3 + "\n");
+	                txtS.append("Precio\t:  " + "S/.  " + precio3 + "\n");
+	                txtS.append("Ancho (cm)\t:  "  + ancho3 + " cm" + "\n");
+	                txtS.append("Largo (cm)\t:  " + largo3 + " cm" + "\n");
+	                txtS.append("Espesor (mm)\t:  " + espesor3 + " cm" + "\n");
+	                txtS.append("Contenido\t:  " + contenido3 + " unidades" + "\n" + "\n");
+	                
+	                txtS.append("Modelo\t: " + modelo4 + "\n");
+	                txtS.append("Precio\t:  " + "S/.  " + precio4 + "\n");
+	                txtS.append("Ancho (cm)\t:  "  + ancho4 + " cm" + "\n");
+	                txtS.append("Largo (cm)\t:  " + largo4 + " cm" + "\n");
+	                txtS.append("Espesor (mm)\t:  " + espesor4 + " cm" + "\n");
+	                txtS.append("Contenido\t:  " + contenido4 + " unidades" + "\n" + "\n");
+				
+			}
+		});
+		btnListar.setBounds(243, 296, 89, 23);
+		getContentPane().add(btnListar);
+
+	}
+}

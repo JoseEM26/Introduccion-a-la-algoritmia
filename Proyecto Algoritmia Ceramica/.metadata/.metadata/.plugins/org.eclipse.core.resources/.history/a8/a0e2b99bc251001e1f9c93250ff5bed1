@@ -1,0 +1,56 @@
+package Ceramica;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+public class ConfigOptima extends JDialog {
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ConfigOptima dialog = new ConfigOptima();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public ConfigOptima() {
+		setBounds(100, 100, 450, 116);
+		getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Cantidad \u00F3ptima de unidades vendidas");
+		lblNewLabel.setBounds(21, 22, 194, 14);
+		getContentPane().add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(225, 19, 49, 20);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(313, 11, 89, 23);
+		getContentPane().add(btnAceptar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(313, 45, 89, 23);
+		getContentPane().add(btnCancelar);
+
+	}
+
+}

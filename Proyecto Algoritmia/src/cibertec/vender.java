@@ -106,6 +106,7 @@ public class vender extends JDialog implements ActionListener {
 		}
 	}
 	protected void actionPerformedCboModelo(ActionEvent e) {
+		//Con esto sale automaticamente el precio con cada producto que selecione del combo
 		int modelo=cboModelo.getSelectedIndex();
 		switch(modelo) {
 		case 0:

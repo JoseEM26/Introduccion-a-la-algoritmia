@@ -1,0 +1,76 @@
+package Ceramica;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class ConfigDiaria extends JDialog {
+	private JTextField textField;
+	private JButton btnAceptar;
+	private JButton btnCancelar;
+private Menu parentFrame;
+	
+	public ConfigDiaria(Menu parentFrame) {  
+        this.parentFrame = parentFrame;  
+    }
+
+	/**
+	 * Launch the application.
+	 */
+	double diario = Menu.cuotaDiaria;
+	String candiar = String.valueOf(diario);
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ConfigDiaria dialog = new ConfigDiaria();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public ConfigDiaria() {
+		setTitle("Configurar cuota diaria");
+		setBounds(100, 100, 423, 127);
+		getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Cuota diaria esperada (S/.)");
+		lblNewLabel.setBounds(10, 21, 145, 14);
+		getContentPane().add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setText(candiar);
+		textField.setBounds(165, 18, 113, 20);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 parentFrame.cuotaDiaria = Double.parseDouble(textField.getText());
+				
+			}
+		});
+		btnAceptar.setBounds(307, 17, 89, 23);
+		getContentPane().add(btnAceptar);
+		
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(307, 51, 89, 23);
+		getContentPane().add(btnCancelar);
+
+	}
+
+}

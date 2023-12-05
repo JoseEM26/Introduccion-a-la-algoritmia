@@ -1,0 +1,77 @@
+package Ceramica;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+
+public class GenRepor extends JDialog {
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			GenRepor dialog = new GenRepor();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public GenRepor() {
+		setBounds(100, 100, 661, 374);
+		getContentPane().setLayout(null);
+		
+		JLabel lblReporte = new JLabel("Tipo de Reporte");
+		lblReporte.setBounds(10, 11, 101, 14);
+		getContentPane().add(lblReporte);
+		
+		JComboBox cboReporte = new JComboBox();
+		cboReporte.addActionListener(new ActionListener() {}
+		
+		
+			
+			
+		
+			
+			}
+		});
+		cboReporte.setModel(new DefaultComboBoxModel(new String[] {"Ventas por modelo", "Comparaci\u00F3n de precios con el precio promedio", "Comparaci\u00F3n de cajas vendidas con la cantidad \u00F3ptima", "Estad\u00EDstica sobre el precio"}));
+		cboReporte.setBounds(98, 7, 417, 22);
+		getContentPane().add(cboReporte);
+		
+		JButton btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnCerrarActionPerformed(e);
+			}
+		});
+		btnCerrar.setBounds(553, 7, 89, 23);
+		getContentPane().add(btnCerrar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 63, 625, 261);
+		getContentPane().add(scrollPane);
+		
+		JTextArea textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+	}
+	protected void btnCerrarActionPerformed(ActionEvent e) {
+		setVisible(false);}
+}

@@ -1,0 +1,401 @@
+package Ceramica;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+import java.awt.Toolkit;
+import java.awt.Color;
+
+public class Vender extends JDialog {
+	private JTextField txtPrecio;
+	private JTextField txtCantidad;
+	private JButton btnCerrar;
+	 private Menu parentFrame;
+	 private JButton btnVender;
+	 private JComboBox cmbVentas;
+	 private JTextArea txtS;
+	 private int contadorVentas = 0;
+	 static double imto ;
+	 static int cantidad;
+	 static int cantidad1;
+	 static int cantidad2;
+	 static int cantidad3;
+	 static int cantidad4;
+	 private double desto;
+	 public static int uniobs1;
+
+	    public Vender(Menu parentFrame) {  
+	        this.parentFrame = parentFrame;  
+	    }
+
+	/**
+	 * Launch the application.
+	 */
+	    double pre = Menu.precio0;
+		String po1 = String.valueOf(pre);
+	    
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Vender dialog = new Vender();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+
+	
+
+	
+	public Vender() {
+		getContentPane().setBackground(new Color(175, 238, 238));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Proyecto Algoritmia Ceramica\\img\\comercio.png"));
+		setTitle("Vender");
+		setBounds(100, 100, 451, 322);
+		getContentPane().setLayout(null);
+		
+		JLabel lblModelo = new JLabel("Modelo");
+		lblModelo.setBounds(10, 11, 73, 14);
+		getContentPane().add(lblModelo);
+		
+		JLabel lblPrecio = new JLabel("Precio (S/)");
+		lblPrecio.setBounds(10, 36, 73, 14);
+		getContentPane().add(lblPrecio);
+		
+		JLabel lblCantidad = new JLabel("Cantidad");
+		lblCantidad.setBounds(10, 61, 73, 14);
+		getContentPane().add(lblCantidad);
+		
+		txtPrecio = new JTextField();
+		txtPrecio.setText(po1);
+		txtPrecio.setToolTipText("");
+		txtPrecio.setEditable(false);
+		txtPrecio.setBounds(93, 33, 183, 20);
+		getContentPane().add(txtPrecio);
+		txtPrecio.setColumns(10);
+		
+		txtCantidad = new JTextField();
+		txtCantidad.setBounds(93, 58, 183, 20);
+		getContentPane().add(txtCantidad);
+		txtCantidad.setColumns(10);
+		
+		cmbVentas = new JComboBox();
+		cmbVentas.setModel(new DefaultComboBoxModel(new String[] {"Cinza Plus", "Luxury", "Austria", "Yungay Mix", "Thal\u00EDa"}));
+		cmbVentas.setBounds(93, 7, 183, 22);
+		getContentPane().add(cmbVentas);
+		cmbVentas.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	           
+	                String modeloSeleccionado = cmbVentas.getSelectedItem().toString();
+	                
+	                
+	                
+	                switch (modeloSeleccionado) {
+	                    case "Cinza Plus":
+	                        txtPrecio.setText(String.valueOf(parentFrame.precio0));
+	                        
+	                        
+	                        break;
+	                    case "Luxury":
+	                        txtPrecio.setText(String.valueOf(parentFrame.precio1));
+	                        
+	                        break;
+	                    case "Austria":
+	                        txtPrecio.setText(String.valueOf(parentFrame.precio2));
+	                        
+	                        break;
+	                    case "Yungay Mix":
+	                        txtPrecio.setText(String.valueOf(parentFrame.precio3));
+	                       
+	                        break;
+	                    case "Thalía":
+	                        txtPrecio.setText(String.valueOf(parentFrame.precio4));
+	                        
+	                        break;
+	                }
+	            }
+	        });
+		
+		btnVender = new JButton("Vender");
+		btnVender.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				 double imcom, imdes = 0, impag = 0;
+				 double precio = Menu.precio0;
+				 double precio1 = Menu.precio1; 
+				 double precio2 = Menu.precio2;
+				 double precio3 = Menu.precio3;
+				 double precio4 = Menu.precio4;
+	           	 double por1 = Menu.porcentaje1;
+	           	 double por2 = Menu.porcentaje2;
+	           	 double por3 = Menu.porcentaje3;
+	           	 double por4 = Menu.porcentaje4;
+	           	 double diar = Menu.cuotaDiaria;
+	           	 String obs = Menu.tipoObsequio;
+	           	 int obs1 = Menu.obsequioCantidad1;
+	           	 int obs2 = Menu.obsequioCantidad2;
+	           	 int obs3 = Menu.obsequioCantidad3;
+	           	 
+			 String modeloSeleccionado = cmbVentas.getSelectedItem().toString();
+        	 cantidad++;
+
+				 
+
+           	 
+				 
+				 
+				  switch (modeloSeleccionado) {
+                  case "Cinza Plus":
+                	  cantidad = Integer.parseInt(txtCantidad.getText());
+                	  
+                	  
+                	  if (cantidad >= 1 && cantidad <= 5)
+                			  imdes = (por1 / 100) * precio * cantidad ;
+                	  
+                	  else if (cantidad >= 6 && cantidad <= 10)
+            			  imdes = (por2 / 100) * precio * cantidad;
+                	  
+                	  else if (cantidad >= 11 && cantidad <= 15)
+            			  imdes =(por3 / 100) * precio * cantidad;
+                	  
+                	  else if (cantidad >= 16)
+            			  imdes = (por4 / 100) * precio * cantidad;
+                	  
+                	  if (cantidad >= 1 && cantidad <= 5)
+                		  uniobs1 = obs1 * cantidad;
+                	  
+                	  else if (cantidad >= 6 && cantidad <= 10)
+                		  uniobs1 = obs2 * cantidad;
+                	  
+                	  else if (cantidad >= 11 )
+                		  uniobs1 = obs1 * cantidad;
+                	  
+                	  imcom = cantidad * precio;
+                	  impag = imcom - imdes;
+                	  
+                	 
+                	  
+                	 txtS.setText("BOLETA DE VENTA \n\n");
+                	 txtS.append("Modelo\t\t:" + "  Cinza Plus" + "\n");
+                	 txtS.append("Precio\t\t:" + "  S/.  " + precio + "\n");
+                	 txtS.append("Cantidad adquirida\t:   " + cantidad + "\n");
+                	 txtS.append("Importe compra\t\t:" + "  S/." + String.format("%,12.2f",imcom) + "\n");
+                	 txtS.append("Importe descuento\t:" + "  S/." + String.format("%,12.2f",imdes) + "\n");
+                	 txtS.append("Importe pagar\t\t:" + "  S/." + String.format("%,12.2f",impag) + "\n");
+                	 txtS.append("Tipo de obsequio\t:   " + obs + "\n");
+                	 txtS.append("Unidades obsequiadas\t:   " + uniobs1 + "\n");
+                      break;
+                  case "Luxury":
+                	  cantidad1 = Integer.parseInt(txtCantidad.getText());
+                	  if (cantidad1 >= 1 && cantidad1 <= 5)
+            			  imdes = (por1 / 100) * precio1 * cantidad ;
+            	  
+            	  else if (cantidad1 >= 6 && cantidad1 <= 10)
+        			  imdes = (por2 / 100) * precio1 * cantidad1;
+            	  
+            	  else if (cantidad1 >= 11 && cantidad1 <= 15)
+        			  imdes =(por3 / 100) * precio1 * cantidad1;
+            	  
+            	  else if (cantidad1 >= 16)
+        			  imdes = (por4 / 100) * precio1 * cantidad1;
+            	  
+            	  if (cantidad1 >= 1 && cantidad1 <= 5)
+            		  uniobs1 = obs1 * cantidad1;
+            	  
+            	  else if (cantidad1 >= 6 && cantidad1 <= 10)
+            		  uniobs1 = obs2 * cantidad1;
+            	  
+            	  else if (cantidad1 >= 11 )
+            		  uniobs1 = obs1 * cantidad1;
+            	  
+            	  imcom = cantidad1 * precio1;
+            	  impag = imcom - imdes;
+            	  
+            	  
+            	 txtS.setText("BOLETA DE VENTA \n\n");
+            	 txtS.append("Modelo\t\t:" + "  Luxury" + "\n");
+            	 txtS.append("Precio\t\t:" + "  S/.  " + precio1 + "\n");
+            	 txtS.append("Cantidad adquirida\t:   " + cantidad1 + "\n");
+            	 txtS.append("Importe compra\t\t:" + "  S/." + String.format("%,12.2f",imcom) + "\n");
+            	 txtS.append("Importe descuento\t:" + "  S/." + String.format("%,12.2f",imdes) + "\n");
+            	 txtS.append("Importe pagar\t\t:" + "  S/." + String.format("%,12.2f",impag) + "\n");
+            	 txtS.append("Tipo de obsequio\t:   " + obs + "\n");
+            	 txtS.append("Unidades obsequiadas\t:   " + uniobs1 + "\n");
+                      break;
+                  case "Austria":
+                	  cantidad2 = Integer.parseInt(txtCantidad.getText());
+                	  if (cantidad2 >= 1 && cantidad2 <= 5)
+            			  imdes = (por1 / 100) * precio2 * cantidad2 ;
+            	  
+            	  else if (cantidad2 >= 6 && cantidad2 <= 10)
+        			  imdes = (por2 / 100) * precio2 * cantidad2;
+            	  
+            	  else if (cantidad2 >= 11 && cantidad2 <= 15)
+        			  imdes =(por3 / 100) * precio2 * cantidad2;
+            	  
+            	  else if (cantidad2 >= 16)
+        			  imdes = (por4 / 100) * precio2 * cantidad2;
+            	  
+            	  if (cantidad2 >= 1 && cantidad2 <= 5)
+            		  uniobs1 = obs1 * cantidad2;
+            	  
+            	  else if (cantidad2 >= 6 && cantidad2 <= 10)
+            		  uniobs1 = obs2 * cantidad2;
+            	  
+            	  else if (cantidad2 >= 11 )
+            		  uniobs1 = obs1 * cantidad2;
+            	  
+            	  imcom = cantidad2 * precio2;
+            	  impag = imcom - imdes;
+            	  
+            	  
+            	 txtS.setText("BOLETA DE VENTA \n\n");
+            	 txtS.append("Modelo\t\t:" + "  Luxury" + "\n");
+            	 txtS.append("Precio\t\t:" + "  S/.  " + precio2 + "\n");
+            	 txtS.append("Cantidad adquirida\t:   " + cantidad2 + "\n");
+            	 txtS.append("Importe compra\t\t:" + "  S/." + String.format("%,12.2f",imcom) + "\n");
+            	 txtS.append("Importe descuento\t:" + "  S/." + String.format("%,12.2f",imdes) + "\n");
+            	 txtS.append("Importe pagar\t\t:" + "  S/." + String.format("%,12.2f",impag) + "\n");
+            	 txtS.append("Tipo de obsequio\t:   " + obs + "\n");
+            	 txtS.append("Unidades obsequiadas\t:   " + uniobs1 + "\n");
+                      
+                      break;
+                  case "Yungay Mix":
+                	  cantidad3 = Integer.parseInt(txtCantidad.getText());
+                	  if (cantidad3 >= 1 && cantidad3 <= 5)
+            			  imdes = (por1 / 100) * precio3 * cantidad3 ;
+            	  
+            	  else if (cantidad3 >= 6 && cantidad3 <= 10)
+        			  imdes = (por2 / 100) * precio3 * cantidad3;
+            	  
+            	  else if (cantidad3 >= 11 && cantidad3 <= 15)
+        			  imdes =(por3 / 100) * precio3 * cantidad3;
+            	  
+            	  else if (cantidad3 >= 16)
+        			  imdes = (por4 / 100) * precio3 * cantidad3;
+            	  
+            	  if (cantidad3 >= 1 && cantidad3 <= 5)
+            		  uniobs1 = obs1 * cantidad3;
+            	  
+            	  else if (cantidad3 >= 6 && cantidad3 <= 10)
+            		  uniobs1 = obs2 * cantidad3;
+            	  
+            	  else if (cantidad3 >= 11 )
+            		  uniobs1 = obs1 * cantidad3;
+            	  
+            	  imcom = cantidad3 * precio3;
+            	  impag = imcom - imdes;
+            	  
+            	  
+            	 txtS.setText("BOLETA DE VENTA \n\n");
+            	 txtS.append("Modelo\t\t:" + "  Luxury" + "\n");
+            	 txtS.append("Precio\t\t:" + "  S/.  " + precio3 + "\n");
+            	 txtS.append("Cantidad adquirida\t:   " + cantidad3 + "\n");
+            	 txtS.append("Importe compra\t\t:" + "  S/." + String.format("%,12.2f",imcom) + "\n");
+            	 txtS.append("Importe descuento\t:" + "  S/." + String.format("%,12.2f",imdes) + "\n");
+            	 txtS.append("Importe pagar\t\t:" + "  S/." + String.format("%,12.2f",impag) + "\n");
+            	 txtS.append("Tipo de obsequio\t:   " + obs + "\n");
+            	 txtS.append("Unidades obsequiadas\t:   " + uniobs1 + "\n");
+                      
+                      
+                      break;
+                  case "Thalía":
+                	  cantidad4 = Integer.parseInt(txtCantidad.getText());
+                	  if (cantidad4 >= 1 && cantidad4 <= 5)
+            			  imdes = (por1 / 100) * precio4 * cantidad4 ;
+            	  
+            	  else if (cantidad4 >= 6 && cantidad4 <= 10)
+        			  imdes = (por2 / 100) * precio4 * cantidad4;
+            	  
+            	  else if (cantidad4 >= 11 && cantidad4 <= 15)
+        			  imdes =(por3 / 100) * precio4 * cantidad4;
+            	  
+            	  else if (cantidad4 >= 16)
+        			  imdes = (por4 / 100) * precio4 * cantidad4;
+            	  
+            	  if (cantidad4 >= 1 && cantidad4 <= 5)
+            		  uniobs1 = obs1 * cantidad4;
+            	  
+            	  else if (cantidad4 >= 6 && cantidad4 <= 10)
+            		  uniobs1 = obs2 * cantidad;
+            	  
+            	  else if (cantidad4 >= 11 )
+            		  uniobs1 = obs1 * cantidad4;
+            	  
+            	  imcom = cantidad4 * precio4;
+            	  impag = imcom - imdes;
+            	  
+            	  
+            	 txtS.setText("BOLETA DE VENTA \n\n");
+            	 txtS.append("Modelo\t\t:" + "  Luxury" + "\n");
+            	 txtS.append("Precio\t\t:" + "  S/.  " + precio4 + "\n");
+            	 txtS.append("Cantidad adquirida\t:   " + cantidad4 + "\n");
+            	 txtS.append("Importe compra\t\t:" + "  S/." + String.format("%,12.2f",imcom) + "\n");
+            	 txtS.append("Importe descuento\t:" + "  S/." + String.format("%,12.2f",imdes) + "\n");
+            	 txtS.append("Importe pagar\t\t:" + "  S/." + String.format("%,12.2f",impag) + "\n");
+            	 txtS.append("Tipo de obsequio\t:   " + obs + "\n");
+            	 txtS.append("Unidades obsequiadas\t:   " + uniobs1 + "\n");
+                    
+                      
+                      break;
+				  }
+				  imto += impag;
+				  
+                contadorVentas++;
+                
+                if (contadorVentas % 5 == 0) {
+                       JOptionPane.showMessageDialog(Vender.this, "Venta Nro. 5" + "\n" + 
+                "Importe total acumulado: "
+                + "S/." +  String.format("%,12.2f",imto) + "\n"
+                + "Porcentaje de la cuota diaria: " + "   " +
+                String.format("%.2f%%", ((imto /diar ) * 100 ))  , "Avance de ventas", JOptionPane.INFORMATION_MESSAGE);
+             
+                
+                }          
+			}
+			});
+		
+				 
+			
+		btnVender.setBounds(333, 7, 89, 23);
+		getContentPane().add(btnVender);
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnCerrar.setBounds(333, 36, 89, 23);
+		getContentPane().add(btnCerrar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 86, 415, 186);
+		getContentPane().add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+
+		
+	}
+}
+
+
