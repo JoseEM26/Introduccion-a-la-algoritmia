@@ -13,7 +13,7 @@ public class Cliente {
 		this.dni = dni;
 	}
     public Cliente(int codigoCliente,String nombres,String apellido) {	
-        this(codigoCliente,nombres,apellido,"DIRECCIONXXX","999999999","7777777");
+        this(codigoCliente,nombres,apellido,"DIRECCIONXXX","000000000","0000000");
     }
     
 	public int getCodigoCliente() {
