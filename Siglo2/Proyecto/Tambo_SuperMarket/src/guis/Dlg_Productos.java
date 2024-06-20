@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import arreglos.ArregloProducto;
 import Clases.Producto;
 import java.awt.FlowLayout;
+import java.awt.ScrollPane;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -14,6 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Dlg_Productos extends JDialog {
 
@@ -30,11 +34,13 @@ public class Dlg_Productos extends JDialog {
 	private JButton btnConsulta;
 	private JButton btnEliminacion;
 	private JButton btnListado;
-	private JButton btnAgregar;
-	private JButton btnModificar;
-	private JButton btnEliminar;
-	
+	private JButton btnExtraAgregar;
+	private JButton btnExtraModificar;
+	private JButton btnExtraEliminar;
+	DefaultTableModel modelo=new DefaultTableModel();
 	ArregloProducto apro=new ArregloProducto();
+     private JButton btnSalir;
+	private JTable table;
 	
 
 	/**
@@ -54,7 +60,7 @@ public class Dlg_Productos extends JDialog {
 	 * Create the dialog.
 	 */
 	public Dlg_Productos() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 329);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -126,43 +132,68 @@ public class Dlg_Productos extends JDialog {
 		}
 		{
 			btnModificacion = new JButton("Modificacion");
+			btnModificacion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					actionPerformedBtnModificacion(e);
+				}
+			});
 			btnModificacion.setBounds(335, 54, 89, 23);
 			contentPanel.add(btnModificacion);
 		}
 		{
 			btnConsulta = new JButton("Consulta");
+			btnConsulta.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					actionPerformedBtnConsulta(e);
+				}
+			});
 			btnConsulta.setBounds(335, 79, 89, 23);
 			contentPanel.add(btnConsulta);
 		}
 		{
 			btnEliminacion = new JButton("Eliminacion");
+			btnEliminacion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					actionPerformedBtnEliminacion(e);
+				}
+			});
 			btnEliminacion.setBounds(335, 104, 89, 23);
 			contentPanel.add(btnEliminacion);
 		}
 		{
 			btnListado = new JButton("Listado");
+			btnListado.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					actionPerformedBtnListado(e);
+				}
+			});
 			btnListado.setBounds(335, 129, 89, 23);
 			contentPanel.add(btnListado);
 		}
 		{
-			btnAgregar = new JButton("Agregar");
-			btnAgregar.addActionListener(new ActionListener() {
+			btnExtraAgregar = new JButton("Agregar");
+			btnExtraAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					actionPerformedBtnAgregar(e);
 				}
 			});
-			btnAgregar.setBounds(178, 29, 89, 23);
-			contentPanel.add(btnAgregar);
+			btnExtraAgregar.setBounds(178, 11, 89, 23);
+			contentPanel.add(btnExtraAgregar);
 		}
 		{
-			btnModificar = new JButton("Modificar");
-			btnModificar.setBounds(178, 54, 89, 23);
-			contentPanel.add(btnModificar);
+			btnExtraModificar = new JButton("Modificar");
+			btnExtraModificar.setBounds(178, 104, 89, 23);
+			contentPanel.add(btnExtraModificar);
 		}
 		{
-			btnEliminar = new JButton("Eliminar");
-			btnEliminar.setBounds(178, 79, 89, 23);
-			contentPanel.add(btnEliminar);
+			btnExtraEliminar = new JButton("Eliminar");
+			btnExtraEliminar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					actionPerformedBtnExtraEliminar(e);
+				}
+			});
+			btnExtraEliminar.setBounds(178, 29, 89, 23);
+			contentPanel.add(btnExtraEliminar);
 		}
 		{
 			JLabel lblNewLabel_5 = new JLabel("stockMaximo");
@@ -175,10 +206,49 @@ public class Dlg_Productos extends JDialog {
 			txtstockmax.setBounds(82, 152, 86, 20);
 			contentPanel.add(txtstockmax);
 		}
+		
+		btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionPerformedBtnSalir(e);
+			}
+		});
+		btnSalir.setBounds(178, 54, 89, 23);
+		contentPanel.add(btnSalir);
+		
+		JScrollPane scrollPaneTable = new JScrollPane();
+		scrollPaneTable.setBounds(10, 180, 414, 106);
+		contentPanel.add(scrollPaneTable);
+		
+		table = new JTable();
+		scrollPaneTable.setViewportView(table);
+		////////////////////////////////////////
+		modelo.addColumn("Codigo");
+		modelo.addColumn("Nombre");
+		modelo.addColumn("StockActual");
+		modelo.addColumn("StockMinimo");
+		modelo.addColumn("StockMaximo");
+		table.setModel(modelo);
+		////////////////////////////////////////
 		OcultarBotonesExtras();
+		
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void Listado() {
+		modelo.setRowCount(0);
+	       for(int i=0;i<apro.Tamano();i++) {
+	    	   Object fila[]= {
+	    			   apro.Obtener(i).getCodigoProducto(),
+	    			   apro.Obtener(i).getNombre(),
+	    			   apro.Obtener(i).getStockActual(),
+	    			   apro.Obtener(i).getStockMinimo(),
+	    			   apro.Obtener(i).getStockMaximo(),
+	    	   };
+	    	   modelo.addRow(fila);
+	       }
+	}
 	public void DesactivarBotonesPrincipales() {
 		btnIngreso.setEnabled(false);
 		btnEliminacion.setEnabled(false);
@@ -192,11 +262,14 @@ public class Dlg_Productos extends JDialog {
 		btnConsulta.setEnabled(true);
 		btnListado.setEnabled(true);
 		btnModificacion.setEnabled(true);
+
 	}
 	public void OcultarBotonesExtras() {
-		btnAgregar.setVisible(false);
-		btnModificar.setVisible(false);
-		btnEliminar.setVisible(false);
+		btnExtraAgregar.setVisible(false);
+		btnExtraModificar.setVisible(false);
+		btnExtraEliminar.setVisible(false);
+		btnSalir.setVisible(false);
+		
 	}
 	public void Limpiar() {
 		txtcodigoProducto.setText("");
@@ -246,19 +319,56 @@ public class Dlg_Productos extends JDialog {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	protected void actionPerformedBtnIngreso(ActionEvent e) {
-		btnAgregar.setVisible(true);
+		btnSalir.setVisible(true);
+		btnExtraAgregar.setVisible(true);
 		DesactivarBotonesPrincipales();
 		btnIngreso.setEnabled(true);
 		txtcodigoProducto.requestFocus();
 		txtcodigoProducto.setEditable(false);
 		txtcodigoProducto.setText(apro.CodigoCorrelativo()+"");
 		
+		
 	}
-	
 	protected void actionPerformedBtnAgregar(ActionEvent e) {
 		apro.Adicionar(new Producto(apro.CodigoCorrelativo(), LeerNombre(), LeerPrecio(), LeerStockActual(), LeerStockMinimo()	, LeerStockMaximo()));
 		Mensaje("Se Agrego Nuevo Producto Exitosamente!");
 		Limpiar();
 		txtcodigoProducto.setText(apro.CodigoCorrelativo()+"");
+	}
+	protected void actionPerformedBtnSalir(ActionEvent e) {
+		ActivarBotonesPrincipales();
+		OcultarBotonesExtras();
+		txtcodigoProducto.setText("");
+		txtcodigoProducto.setEditable(true);
+		ActivarCampos();
+		
+	}
+	protected void actionPerformedBtnEliminacion(ActionEvent e) {
+		DesactivarBotonesPrincipales();
+		DesactivarCampos();
+		txtcodigoProducto.setEditable(true);
+		btnExtraEliminar.setEnabled(true);
+		btnExtraEliminar.setVisible(true);
+		btnEliminacion.setVisible(true);
+		btnEliminacion.setEnabled(true);
+		btnSalir.setVisible(true);
+		
+		
+		
+	}
+	protected void actionPerformedBtnListado(ActionEvent e) {
+		   
+	       Listado();
+	}
+	protected void actionPerformedBtnModificacion(ActionEvent e) {
+	}
+	protected void actionPerformedBtnConsulta(ActionEvent e) {
+	}
+	protected void actionPerformedBtnExtraEliminar(ActionEvent e) {
+		int codigo=(Integer.parseInt(txtcodigoProducto.getText()))-2001;
+	    apro.EliminarProducto(codigo);
+	    Mensaje("Se Elimino Correctamente");
+	    Limpiar();
+	    Listado();
 	}
 }
