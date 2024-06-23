@@ -16,10 +16,13 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import arreglos.ArregloProducto;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
+import arreglos.*;
+import Clases.*;
 
 public class Dlg_Ventas extends JDialog {
 
@@ -33,6 +36,7 @@ public class Dlg_Ventas extends JDialog {
 	private JTextField txtComprarCodigo;
 	ArregloProducto pro=new ArregloProducto();
 	DefaultTableModel modelo=new DefaultTableModel();
+	ArregloVentas ven=new ArregloVentas();
 	private JTextField txtConsultarNombrePro;
 	private JTextField txtConsultarNombreProductito;
 	private JTable table;
@@ -44,6 +48,13 @@ public class Dlg_Ventas extends JDialog {
 	private JLabel lblCodigoVenta;
 	private JLabel lblCodigoVenta_1;
 	private JButton btnConsultardatos;
+	private JButton btnMostarBoleta;
+	private JLabel lblNombreCliente;
+	private JLabel lblNewLabel_2;
+	private JTextField txtComprarNombreCliente;
+	private JTextField txtComprarNombreVendedor;
+	private JLabel lblDireccion;
+	private JTextField txtComprarDireccion;
 
 	/**
 	 * Launch the application.
@@ -63,23 +74,23 @@ public class Dlg_Ventas extends JDialog {
 	 */
 	public Dlg_Ventas() {
 		setTitle("Ventas");
-		setBounds(100, 100, 576, 251);
+		setBounds(100, 100, 576, 381);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Cantidad");
-		lblNewLabel.setBounds(316, 40, 65, 14);
+		lblNewLabel.setBounds(317, 99, 65, 14);
 		contentPanel.add(lblNewLabel);
 		
 		txtComprarCantidad = new JTextField();
-		txtComprarCantidad.setBounds(365, 37, 86, 20);
+		txtComprarCantidad.setBounds(365, 96, 86, 20);
 		contentPanel.add(txtComprarCantidad);
 		txtComprarCantidad.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 158, 540, 47);
+		scrollPane.setBounds(10, 217, 540, 114);
 		contentPanel.add(scrollPane);
 		
 		table = new JTable();
@@ -195,22 +206,55 @@ txtConsultarNombreProductito.setEditable(false);
 txtConsultarPrecio.setEditable(false);
 txtConsultarStockMaximo.setEditable(false);
 txtConsultarStockMinimo.setEditable(false);
+btnMostarBoleta = new JButton("Mostar Boleta");
+btnMostarBoleta.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e) {
+		actionPerformedBtnMostarBoleta(e);
+	}
+});
+btnMostarBoleta.setBounds(426, 193, 124, 23);
+contentPanel.add(btnMostarBoleta);
+lblNombreCliente = new JLabel("Nombre Cliente");
+lblNombreCliente.setBounds(317, 40, 65, 14);
+contentPanel.add(lblNombreCliente);
+lblNewLabel_2 = new JLabel("Nombre Vendedor");
+lblNewLabel_2.setBounds(317, 68, 65, 14);
+contentPanel.add(lblNewLabel_2);
+txtComprarNombreCliente = new JTextField();
+txtComprarNombreCliente.setColumns(10);
+txtComprarNombreCliente.setBounds(365, 37, 86, 20);
+contentPanel.add(txtComprarNombreCliente);
+txtComprarNombreVendedor = new JTextField();
+txtComprarNombreVendedor.setColumns(10);
+txtComprarNombreVendedor.setBounds(365, 65, 86, 20);
+contentPanel.add(txtComprarNombreVendedor);
+lblDireccion = new JLabel("Direccion");
+lblDireccion.setBounds(317, 124, 65, 14);
+contentPanel.add(lblDireccion);
+txtComprarDireccion = new JTextField();
+txtComprarDireccion.setColumns(10);
+txtComprarDireccion.setBounds(365, 124, 86, 20);
+contentPanel.add(txtComprarDireccion);
 OcultarConsultaBotones();
 OcultarColsultaTexto();
 
 /////////////////////////////////////////
+
 	}
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
+		
+		
 		try {
 			StockActualizar(); 
 			MostrarTabla();
 			Mensaje("Compra Exitosa");
-			LimpiarComprar();
+			//LimpiarComprar();
 		} catch (Exception e2) {
 			Mensaje("Debe ingresar un dato");
 		}
 		
 	}
+	
 	protected void actionPerformedBtnConsultar(ActionEvent e) {
 		boolean CodigoValido=false;
 		try {
@@ -237,14 +281,25 @@ OcultarColsultaTexto();
 		
 	}
 	//////////////////////////////////////////////////////////////
-	public void StockActualizar() {
-		for(int i=0;i<pro.Tamano();i++) {
-			if(LeerComprarCodigo()==pro.Obtener(i).getCodigoProducto()) {
-			  pro.Obtener(i).setStockActual(pro.Obtener(i).getStockActual()-LeerComprarCantidad());
-			}
-		}
-		
+
+	public int StockActualizar() {
+	    int codigoCompra = LeerComprarCodigo();
+	    int cantidadCompra = LeerComprarCantidad();
+	    int stockActualizado = 0;
+
+	    for (int i = 0; i < pro.Tamano(); i++) {
+	        if (codigoCompra == pro.Obtener(i).getCodigoProducto()) {
+	            Producto producto = pro.Obtener(i);
+	            int nuevoStock = producto.getStockActual() - cantidadCompra;
+	            producto.setStockActual(nuevoStock);
+	            stockActualizado = nuevoStock; 
+	            break; 
+	        }
+	    }
+
+	    return stockActualizado;
 	}
+
 	public void MostrarTabla() {
 		boolean Encontrado=false;
 		
@@ -253,13 +308,16 @@ OcultarColsultaTexto();
 				modelo.setRowCount(0);
 				Object filas[]={
 						
-					LeerComprarCodigo(),
+					ven.CodigoCorrelativoVentas(),
 					pro.Obtener(i).getNombre(),
 					PagoTotalTXt(),
 					IGVSegunTXT(),
 					pro.Obtener(i).getStockActual(),
 				};
+				   ven.Adicionar(new Ventas(ven.CodigoCorrelativoVentas(), LeerComprarCantidad(), PagoTotalTXt(),Fechita()));
+
 				modelo.addRow(filas);
+				
 				Encontrado=true;
 				break;
 			}
@@ -386,4 +444,35 @@ OcultarColsultaTexto();
 		btnConsultardatos.setVisible(true);
 
 	}
+	
+	protected void actionPerformedBtnMostarBoleta(ActionEvent e) {
+		Dlg_Boleta_ventas abrir=new Dlg_Boleta_ventas();
+		abrir.setBoletaCodigo(ven.CodigoCorrelativoVentas()-1);
+		abrir.setBoletaNombreCliente(txtComprarNombreCliente.getText());
+		abrir.setBoletaDireccion(txtComprarDireccion.getText());
+		abrir.setBoletaNombreVendedor(txtComprarNombreVendedor.getText());
+		abrir.setBoletacantidad(LeerComprarCantidad());
+		abrir.setIGV(IGVSegunTXT());
+		abrir.SetSubTotal(SubTotalSegunTXT());
+		abrir.SetPagoCompleto(PagoTotalTXt());
+		abrir.StockActual(StockActualizar()+LeerComprarCantidad());
+		abrir.Fecha(Fechita());
+		abrir.ListarCodigoPro(LeerComprarCodigo());
+		abrir.setVisible(true);
+		
+		
+	}
+	public String Fechita() {
+	    Date Fecha = new Date();
+	    int Mes = Fecha.getMonth() + 1;  
+	    int Dia = Fecha.getDate();
+	    int Año = Fecha.getYear() + 1900;
+	    
+	    String DiaFormateado=Dia<=10?"0"+Dia:String.valueOf(Dia);
+	    String MesFormateado=Mes<=10?"0"+Mes:String.valueOf(Dia);
+
+	    
+	    return MesFormateado + "/" + DiaFormateado + "/" + Año;
+	}
+	
 }

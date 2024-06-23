@@ -24,7 +24,11 @@ public class ArregloVentas {
 	   return ve.get(i);
    }
    
-   public int CodigoCorrelativo() {
+   public void Adicionar(Ventas x) {
+	  ve.add(x);
+   }
+   
+   public int CodigoCorrelativoVentas() {
 	   if(Tamano()==0) {
 		   return 3001;
 	   }else {
