@@ -69,12 +69,44 @@ public class Menu extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		JMenu mnVentas = new JMenu("Ventas");
+		mnVentas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionPerformedMnVentas(e);
+			}
+		});
 		menuBar.add(mnVentas);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("ventas");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionPerformedMntmNewMenuItem_2(e);
+			}
+		});
+		mnVentas.add(mntmNewMenuItem_2);
 		
 		JMenu mnAlmacen = new JMenu("Almacen");
 		menuBar.add(mnAlmacen);
 		
+		JMenuItem mntmNewMenuItem_2_1 = new JMenuItem("Almacen");
+		mntmNewMenuItem_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionPerformedMntmNewMenuItem_2_1(e);
+			}
+		});
+		mnAlmacen.add(mntmNewMenuItem_2_1);
+		
 		JMenu mnReportes = new JMenu("Reportes");
 		menuBar.add(mnReportes);
+	}
+	protected void actionPerformedMnVentas(ActionEvent e) {
+		
+	}
+	protected void actionPerformedMntmNewMenuItem_2(ActionEvent e) {
+		Dlg_Ventas ventas=new Dlg_Ventas();
+		ventas.setVisible(true);
+	}
+	protected void actionPerformedMntmNewMenuItem_2_1(ActionEvent e) {
+		Dlg_Almacen almacen =new Dlg_Almacen();
+		almacen.setVisible(true);
 	}
 }

@@ -30,8 +30,6 @@ public class Dlg_Boleta_ventas extends JDialog {
 	private JTextField txtCliente;
 	private JLabel lblNewLabel_3;
 	private JTextField txtDireccion;
-	private JTextField txtProducto;
-	private JLabel lblNewLabel_4;
 	private JTextField txtStockActual;
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_6;
@@ -132,15 +130,6 @@ public class Dlg_Boleta_ventas extends JDialog {
 		txtDireccion.setBounds(100, 117, 86, 20);
 		contentPanel.add(txtDireccion);
 		
-		txtProducto = new JTextField();
-		txtProducto.setColumns(10);
-		txtProducto.setBounds(100, 163, 86, 20);
-		contentPanel.add(txtProducto);
-		
-		lblNewLabel_4 = new JLabel("Producto");
-		lblNewLabel_4.setBounds(10, 166, 94, 14);
-		contentPanel.add(lblNewLabel_4);
-		
 		txtStockActual = new JTextField();
 		txtStockActual.setColumns(10);
 		txtStockActual.setBounds(269, 163, 86, 20);
@@ -165,7 +154,7 @@ public class Dlg_Boleta_ventas extends JDialog {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		modelo.addColumn("Codigo");
+		modelo.addColumn("Codigo Producto");
 		modelo.addColumn("Nombre");
 		modelo.addColumn("Precio");
 		modelo.addColumn("StockMaximo");
@@ -239,11 +228,7 @@ public class Dlg_Boleta_ventas extends JDialog {
 		textField_2.setBounds(269, 11, 294, 123);
 		contentPanel.add(textField_2);
 		
-		for(int i=0;i<pro.Tamano();i++) {
-			if(codigo==codigo) {
-				txtProducto.setText(pro.Obtener(i).getNombre());
-			}
-		}
+		
 		///////////////////////////////////////////////////
 		txtBoletaDeVenta.setEditable(false);
 		txtCantidad.setEditable(false);
@@ -252,7 +237,6 @@ public class Dlg_Boleta_ventas extends JDialog {
 		txtDireccion.setEditable(false);
 		txtFecha.setEditable(false);
 		txtIGV.setEditable(false);
-		txtProducto.setEditable(false);
 		txtRuc.setEditable(false);
 		txtStockActual.setEditable(false);
 		txtSubTotal.setEditable(false);

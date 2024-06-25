@@ -96,7 +96,7 @@ public class Dlg_Ventas extends JDialog {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		//////////////////////////////////
-		modelo.addColumn("Codigo");
+		modelo.addColumn("Codigo Boleta");
 		modelo.addColumn("Nombre");
 		modelo.addColumn("Monto");
 		modelo.addColumn("IGV");
@@ -241,20 +241,24 @@ OcultarColsultaTexto();
 /////////////////////////////////////////
 
 	}
+	//BOTON COMPRAR
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
-		
-		
-		try {
-			StockActualizar(); 
-			MostrarTabla();
-			Mensaje("Compra Exitosa");
-			//LimpiarComprar();
-		} catch (Exception e2) {
-			Mensaje("Debe ingresar un dato");
-		}
-		
+	    try {
+	        int cantidadValidada = LeerComprarCantidad();
+
+	        if (cantidadValidada > 0) {
+	            StockActualizar();
+	            MostrarTabla();
+	            Mensaje("Compra Exitosa");
+	            btnMostarBoleta.setEnabled(true);
+
+	        }
+	    } catch (Exception e2) {
+	        Mensaje("Ocurrió un error durante la compra");
+	    }
 	}
-	
+
+	//BOTON CONSULTAR
 	protected void actionPerformedBtnConsultar(ActionEvent e) {
 		boolean CodigoValido=false;
 		try {
@@ -280,8 +284,21 @@ OcultarColsultaTexto();
 		
 		
 	}
-	//////////////////////////////////////////////////////////////
+	//BOTON CONSULTAR DATOS
+	protected void actionPerformedBtnConsultardatos(ActionEvent e) {
+		MostrarColsultaTexto();
+		MostrarConsultaBotones();
+		btnConsultardatos.setVisible(false);
+	}
+	//BOTON CERRAR O OCULTAR LA CONSULTA
+	protected void actionPerformedBtnConsultarCerrar(ActionEvent e) {
+		OcultarColsultaTexto();
+		OcultarConsultaBotones();
+		btnConsultardatos.setVisible(true);
 
+	}
+//////////////////////////////////////////////////////////////
+/////METODOS PARA ACTUALIZAR EL STOCK   //////////////////////////////////////////////////////////////////////////////////
 	public int StockActualizar() {
 	    int codigoCompra = LeerComprarCodigo();
 	    int cantidadCompra = LeerComprarCantidad();
@@ -291,14 +308,21 @@ OcultarColsultaTexto();
 	        if (codigoCompra == pro.Obtener(i).getCodigoProducto()) {
 	            Producto producto = pro.Obtener(i);
 	            int nuevoStock = producto.getStockActual() - cantidadCompra;
-	            producto.setStockActual(nuevoStock);
-	            stockActualizado = nuevoStock; 
+	           
+	            	if(nuevoStock>0) {
+	            		producto.setStockActual(nuevoStock);
+			            stockActualizado = nuevoStock; 
+	            	}
+				
 	            break; 
 	        }
 	    }
 
 	    return stockActualizado;
 	}
+//////////////////////////////////////////////////////////////
+//////////////METODO PARA MOSTRAR LA TABLA///////////////////
+//////////////////////////////////////////////////////////////
 
 	public void MostrarTabla() {
 		boolean Encontrado=false;
@@ -327,6 +351,22 @@ OcultarColsultaTexto();
 		}
 		
 	}
+//////////////////////////////////////////////////////////////
+//////////////METODO PARA MOSTRAR LA FECHA ACTUAL/////////////
+//////////////////////////////////////////////////////////////
+	public String Fechita() {
+	    Date Fecha = new Date();
+	    int Mes = Fecha.getMonth() + 1;  
+	    int Dia = Fecha.getDate();
+	    int Año = Fecha.getYear() + 1900;
+	    
+	    String DiaFormateado=Dia<=10?"0"+Dia:String.valueOf(Dia);
+	    String MesFormateado=Mes<=10?"0"+Mes:String.valueOf(Dia);
+
+	    
+	    return MesFormateado + "/" + DiaFormateado + "/" + Año;
+	}////////////////////////////////////////////////////////////////////////////METODO PARA HACER LAS COMPRAR/////////////////////////////////////////////////////////////////////////////////
+
 	public double SubTotalSegunTXT() {
 		double Total=0;
 		for(int i=0;i<pro.Tamano();i++) {
@@ -348,8 +388,6 @@ OcultarColsultaTexto();
 			}
 		return Total;
 		}
-	   
-	   
 	   public double IGVSegunTXT() {
 		   return SubTotalSegunTXT()*0.18;
 	   }	   
@@ -357,12 +395,44 @@ OcultarColsultaTexto();
 		   return SubTotalSegunTXT()-IGVSegunTXT();
 	   }
 	   
-	int LeerComprarCodigo() {
+		//////////////////////////////////////////////////////////////
+		////////METODOS PARA LEER Y COMVERTIR DATOS DE ENTRADA////////
+		//////////////////////////////////////////////////////////////
+ 
+	   public int LeerComprarCodigo() {
 		return Integer.parseInt(txtComprarCodigo.getText());
 	}
-	int LeerComprarCantidad() {
-		return Integer.parseInt(txtComprarCantidad.getText());
+	   public int LeerComprarCantidad() {
+	    int cantidad = 0;
+	    boolean verificar = false;
+
+	    try {
+	        cantidad = Integer.parseInt(txtComprarCantidad.getText());
+	        int codigoCompra = LeerComprarCodigo();
+	        int stockDisponible = 0;
+
+	        for (int i = 0; i < pro.Tamano(); i++) {
+	            if (codigoCompra == pro.Obtener(i).getCodigoProducto()) {
+	                stockDisponible = pro.Obtener(i).getStockActual();
+	                break;
+	            }
+	        }
+
+	        if (cantidad > stockDisponible) {
+	            Mensaje("La cantidad ingresada excede el stock disponible");
+	            btnMostarBoleta.setEnabled(false);
+	            verificar = false;
+	        } else {
+	            verificar = true;
+	        }
+	    } catch (NumberFormatException e) {
+	        Mensaje("Ingrese una cantidad válida");
+	    }
+
+	    return verificar ? cantidad : 0;
 	}
+
+
 	
 	int LeerConsultarCodigo() {
 		return Integer.parseInt(txtConsultarCodigo.getText());
@@ -379,6 +449,10 @@ OcultarColsultaTexto();
 	void Mensaje(String s) {
 		JOptionPane.showMessageDialog(null, s);
 	}
+	//////////////////////////////////////////////////////////////
+	////////METODOS VACIOS PARA HACER LAS TRANSICIONES////////////
+	//////////////////////////////////////////////////////////////
+
 	void LimpiarComprar() {
 		txtComprarCodigo.setText("");
 		txtComprarCantidad.setText("");
@@ -433,18 +507,13 @@ OcultarColsultaTexto();
 		txtConsultarStockMaximo.setText("");
 		txtConsultarStockMinimo.setText("");
 	}
-	protected void actionPerformedBtnConsultardatos(ActionEvent e) {
-		MostrarColsultaTexto();
-		MostrarConsultaBotones();
-		btnConsultardatos.setVisible(false);
-	}
-	protected void actionPerformedBtnConsultarCerrar(ActionEvent e) {
-		OcultarColsultaTexto();
-		OcultarConsultaBotones();
-		btnConsultardatos.setVisible(true);
-
-	}
+	////////////////////////////////////////////
 	
+	////////////////////////////////////////////
+	//////TRASLADAR DATOS A LA BOLETA///////////////
+	////////////////////////////////////////////
+
+	//BOTON PARA ABRIR LA BOLETA
 	protected void actionPerformedBtnMostarBoleta(ActionEvent e) {
 		Dlg_Boleta_ventas abrir=new Dlg_Boleta_ventas();
 		abrir.setBoletaCodigo(ven.CodigoCorrelativoVentas()-1);
@@ -462,17 +531,7 @@ OcultarColsultaTexto();
 		
 		
 	}
-	public String Fechita() {
-	    Date Fecha = new Date();
-	    int Mes = Fecha.getMonth() + 1;  
-	    int Dia = Fecha.getDate();
-	    int Año = Fecha.getYear() + 1900;
-	    
-	    String DiaFormateado=Dia<=10?"0"+Dia:String.valueOf(Dia);
-	    String MesFormateado=Mes<=10?"0"+Mes:String.valueOf(Dia);
-
-	    
-	    return MesFormateado + "/" + DiaFormateado + "/" + Año;
-	}
+	
+	
 	
 }
