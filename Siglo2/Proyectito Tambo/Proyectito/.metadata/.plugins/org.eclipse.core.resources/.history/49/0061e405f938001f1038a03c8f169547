@@ -1,0 +1,56 @@
+package Guis;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+public class Dlg_ListadoProductos extends JDialog {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			Dlg_ListadoProductos dialog = new Dlg_ListadoProductos();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Dlg_ListadoProductos() {
+		setBounds(100, 100, 464, 358);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		{
+			JButton btnNewButton = new JButton("Listar");
+			btnNewButton.setBounds(160, 11, 113, 23);
+			contentPanel.add(btnNewButton);
+		}
+		{
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(10, 46, 428, 262);
+			contentPanel.add(scrollPane);
+			{
+				JTextArea textArea = new JTextArea();
+				scrollPane.setViewportView(textArea);
+			}
+		}
+	}
+
+}

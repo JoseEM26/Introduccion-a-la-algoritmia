@@ -1,0 +1,146 @@
+package Guis;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import Clases.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Arreglos.ArregloCliente;
+import Arreglos.ArregloProducto;
+import Arreglos.ArregloVenta;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.*;
+
+public class Dlg_ListadoProductos extends JDialog implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JButton btnNewButton;
+	
+	ArregloProducto productos =new ArregloProducto();
+	ArregloVenta ven=new ArregloVenta();
+	ArregloCliente cli =new ArregloCliente(); 
+	private JTextArea textArea;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			Dlg_ListadoProductos dialog = new Dlg_ListadoProductos();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Dlg_ListadoProductos() {
+		setBounds(100, 100, 464, 358);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		{
+			btnNewButton = new JButton("Productos bajo stock minimo");
+			btnNewButton.addActionListener(this);
+			btnNewButton.setBounds(10, 12, 210, 23);
+			contentPanel.add(btnNewButton);
+		}
+		{
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(10, 46, 428, 262);
+			contentPanel.add(scrollPane);
+			{
+				textArea = new JTextArea();
+				scrollPane.setViewportView(textArea);
+			}
+		}
+		{
+			JButton btnNewButton_1 = new JButton("Listado por unidades vendidas");
+			btnNewButton_1.setBounds(230, 12, 208, 23);
+			contentPanel.add(btnNewButton_1);
+		}
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNewButton) {
+			actionPerformedBtnNewButton(e);
+		}
+	}
+	
+	//Bajo stock minimo
+	protected void actionPerformedBtnNewButton(ActionEvent e) {
+		ArrayList<Producto> productosStockBajo = new ArrayList<Producto>();
+        mostrarProductosEnTextArea(productosStockBajo, textArea);
+	}
+	
+	
+	/*public void stockDebajoMinimo() {
+		/*ArrayList <Producto> productos = pro.obtener();*/
+		/*String textoProducto = null;
+		for(int i=0; i<pro.Tamano();i++) {
+			if(pro.Obtener(i).getStockActual()<pro.Obtener(i).getStockMinimo()) {
+				 textoProducto= "Codigo Producto: " + productos.getCodigoProducto()+"\n"+
+										"Nombre del Producto: " + pro.Obtener(i).getNombre()+"\n"+
+										"Stock Actual: " + pro.Obtener(i).getStockActual()+"\n"+
+										"Stock Minimo: " + pro.Obtener(i).getStockMinimo()+"\n";
+			}
+				
+		textArea.append(textoProducto);*/ //ArregloVenta.obtenerProductosStockBajo(ArregloProducto.obtenerProductosStockBajo());
+		
+		
+		
+		
+		
+	
+	
+	 void mostrarProductosEnTextArea(ArrayList<Producto> productos, JTextArea textArea) {
+        textArea.setText("");
+
+        for (Producto producto : productos) {
+            String infoProducto = 
+            		"  Código        : " + producto.getCodigoProducto() + "\n" +
+                    "  Nombre        : " + producto.getNombre() + "\n" +
+                    "  Stock Actual  : " + producto.getStockActual()+ "\n" +
+                    "  Stock Mínimo  : " + producto.getStockMinimo() + "\n";
+            textArea.append(infoProducto);
+        }
+    }
+	
+	
+
+			
+		
+		
+		
+	
+	
+	
+	
+	
+	
+
+
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
