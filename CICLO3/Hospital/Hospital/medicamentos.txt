@@ -1,2 +1,0 @@
-Adrenalina,1000,Antidepresivo,11-04-26,23
-Paracetamol,1000,Antidepresivo,25-01-28,7

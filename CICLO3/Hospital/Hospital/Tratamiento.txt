@@ -1,2 +1,0 @@
-20,Terapia física,Diego,781231,mendez,Activo,19/10/2024,19/10/2026
-22,Quimioterapia,Perez,1561651,hugarte,Activo,20/10/2024,20/10/2026
