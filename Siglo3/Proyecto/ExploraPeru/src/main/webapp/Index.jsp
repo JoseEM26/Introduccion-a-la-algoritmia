@@ -26,6 +26,7 @@
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 
@@ -57,11 +58,11 @@
 	<jsp:include page="fragmetos/contactos.jsp"></jsp:include>
 
 	<!-- Contact-->
-		<jsp:include page="fragmetos/formComent.jsp"></jsp:include>
-	
+	<jsp:include page="fragmetos/formComent.jsp"></jsp:include>
+
 	<!-- Footer-->
-		<jsp:include page="fragmetos/footer.jsp"></jsp:include>
-	
+	<jsp:include page="fragmetos/footer.jsp"></jsp:include>
+
 	<!-- Portfolio Modals-->
 	<!-- Portfolio item 1 modal popup-->
 	<div class="portfolio-modal modal fade" id="portfolioModal1"

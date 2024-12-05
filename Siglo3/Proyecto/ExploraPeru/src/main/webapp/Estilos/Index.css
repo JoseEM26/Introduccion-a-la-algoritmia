@@ -11505,3 +11505,7 @@ h2::after {
 	color: #ffc000;
   
 }
+form .form-control {
+    max-width: 90%; /* Ajusta el ancho según sea necesario */
+    margin: auto;
+}
